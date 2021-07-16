@@ -1,0 +1,5 @@
+{
+    "token": "Your_Token",
+    "prefix": "Your_Prefix",
+    "mongooseConnectionString": "Your_Mongodb_URL_For_Database"
+}
