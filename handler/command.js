@@ -48,6 +48,7 @@ module.exports = async (client) => {
         client.events.set(pull.name, pull);
       }
     }
+    console.log((`${file}  Events Loaded Successfullly`));
   });
 
   // slashcommands start

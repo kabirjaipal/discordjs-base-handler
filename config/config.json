@@ -1,5 +1,5 @@
 {
-    "token": "Your_Token",
-    "prefix": "Your_Prefix",
-    "mongooseConnectionString": "Your_Mongodb_URL_For_Database"
+    "token": "ODYyOTkyMDY3MDA0NTk2MjQ0.YOgZ_g.LTRF0z_i9EdD-H3DAPnMHIP0EMo",
+    "prefix": "!",
+    "mongooseConnectionString": "mongodb+srv://KABU:kabir@315116@kabu.mmxw3.mongodb.net/Bot"
 }
