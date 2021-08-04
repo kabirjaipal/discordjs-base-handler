@@ -1,5 +1,11 @@
-# Best-Advance-Discord.js-v13-Command-Event-Handler-With-SlashCommands-CoolDown
+# Advanced Command Handler for Discord.js v13
 Best  Advance Discord.js v13 Command &amp; Event Handler With SlashCommands , CoolDown || Discord.js v13
+
+# Installation
+
+`npm install` - install all required dependancies
+
+`node index.js` - start the project
 
 
 # **Hosting**
