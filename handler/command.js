@@ -57,13 +57,14 @@ module.exports = async (client) => {
   );
   const arrayofslashCommands = [];
 
-  slashCommands.map((value) => {
-    const file = require(value);
-    if (!file?.name) return;
+  const arrayOfSlashCommands = [];
+    slashCommands.map((value) => {
+        const file = require(value);
+        if (!file?.name) return;
+        client.slashCommands.set(file.name, file);
+        arrayOfSlashCommands.push(file);
+    });
 
-    client.slashCommands.set(file.name, file);
-    arrayofslashCommands.push(file);
-  });
   client.on("ready", async () => {
     client.guilds.cache.forEach(async (g) => {
       await client.guilds.cache.get(g.id).commands.set(arrayofslashCommands);
