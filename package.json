@@ -12,7 +12,7 @@
   "dependencies": {
     "ascii-table": "^0.0.9",
     "colors": "^1.4.0",
-    "discord.js": "^13.0.0-dev.4206e35.1626393827",
+    "discord.js": "^13.1.0",
     "glob": "^7.1.7",
     "moment": "^2.29.1",
     "mongoose": "^5.13.2",
