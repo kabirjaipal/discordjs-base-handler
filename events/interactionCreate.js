@@ -4,7 +4,7 @@ const client = require("..");
 client.on("interactionCreate", async (interaction) => {
     // Slash Command Handling
     if (interaction.isCommand()) {
-        await interaction.defer({ ephemeral: false }).catch(() => {});
+        await interaction.deferReply({ ephemeral: false }).catch(() => {});
 
         const cmd = client.slashCommands.get(interaction.commandName);
         if (!cmd)
@@ -20,7 +20,8 @@ client.on("interactionCreate", async (interaction) => {
                 });
             } else if (option.value) args.push(option.value);
         }
+        interaction.member = interaction.guild.members.cache.get(interaction.user.id);
 
         cmd.run(client, interaction, args);
     }
-});
+}); 
