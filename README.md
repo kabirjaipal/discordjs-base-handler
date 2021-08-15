@@ -34,8 +34,7 @@ Need a hosting to host a minecraft server or discord bot server 24/7 ? I recomme
 
 Site: https://futurehosting.org/
 
-Order discord bot server: https://billing.futurehosting.org/index.php?rp=/store/discord-bot-voice-hosting
-
+future hosting Discord: https://discord.gg/DNme6pzFQB
 
 <br/>
 
