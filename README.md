@@ -30,7 +30,7 @@ Best-Advance-Discord.js-v13-handler</h1><br/>
 
 # **Hosting**
 
-Need a hosting to host a minecraft server or discord bot server 24/7 ? I recommend using https://futurehosting.org/.They provide 24/7 server hosting with best performance at affordable price and discounts.They also have 24/7 support on their discord and site.
+Need a hosting to host a minecraft server or discord bot server 24/7 ? I recommend using `future hosting They` provide 24/7 server hosting with best performance at affordable price and discounts.They also have 24/7 support on their discord and site.
 
 Site: https://futurehosting.org/
 
