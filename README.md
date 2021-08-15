@@ -8,7 +8,7 @@ Best-Advance-Discord.js-v13-handler</h1><br/>
 
  **2.** Download this repo and unzip it  |  or git clone it
  
- **3.** Fill in everything in **`config.json`** Get Colour Code Here [Colour](https://htmlcolorcodes.com)
+ **3.** Fill in everything in **`config.json`**
 
  **4.** after Fill everything in config run  **`setup.bat`**
  
