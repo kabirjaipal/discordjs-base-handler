@@ -13,30 +13,11 @@ const client = new Client({
     repliedUser: true,
   },
   partials: ["MESSAGE", "CHANNEL", "REACTION"],
-  intents: [
-    "GUILDS",
-    "GUILD_MEMBERS",
-    "GUILD_BANS",
-    "GUILD_EMOJIS",
-    "GUILD_MESSAGE_REACTIONS",
-    "GUILD_MESSAGES",
-  ],
+  intents: 32767,
 });
 module.exports = client;
 
 const config = require("./config/config.json");
-const db = require("./utils/ReconDB");
-client.db = db;
-// MongoDB
-const mongoose = require("mongoose");
-mongoose
-  .connect(config.mongooseConnectionString, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-  })
-  .then(console.log("MongoDB Conneted.."));
 
 const ee = require("./config/embed.json");
 const prefix = config.prefix;
@@ -55,4 +36,4 @@ client.categories = fs.readdirSync("./commands/");
   require(`./handler/${handler}`)(client);
 });
 
-client.login(token);
+client.login(token); 
