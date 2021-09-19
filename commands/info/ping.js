@@ -4,7 +4,6 @@ module.exports = {
     name: "ping",
     aliases: ['p'],
     permissions : ["SEND_MESSAGES"],
-    role : true,
     /**
      *
      * @param {Client} client
