@@ -3,7 +3,6 @@ const { Message, Client } = require("discord.js");
 module.exports = {
     name: "ping",
     aliases: ['p'],
-    cooldown: 10,
     permissions : ["SEND_MESSAGES"],
     role : true,
     /**
