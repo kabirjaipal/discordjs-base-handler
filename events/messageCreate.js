@@ -27,7 +27,7 @@ client.on('messageCreate', async message => {
         }
     }
 
-    const command = client.commands.get(cmd.toLowerCase());
+    const command = client.commands.get(cmd.toLowerCase()) ||  client.commands.find((cmds) => cmds.aliases && cmds.aliases.includes(cmd));
     if (!command) return;
     if (command) {
         // checking user perms
