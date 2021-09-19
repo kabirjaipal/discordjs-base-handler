@@ -1,9 +1,7 @@
 const client = require("..");
 var config = require("../settings/config.json");
 var ee = require("../settings/embed.json");
-const ms = require('ms')
 const { MessageEmbed } = require("discord.js");
-const { cooldown_op, mentionprefixnew } = require('../utils/function');
 
 client.on('messageCreate', async message => {
     let prefix = config.prefix
@@ -11,9 +9,7 @@ client.on('messageCreate', async message => {
     if (message.author.bot) return;
     if (message.channel.partial) await message.channel.fetch();
     if (message.partial) await message.fetch();
-    let mentionprefix = new RegExp(`^(<@!?${client.user.id}>|${mentionprefixnew(prefix)})`)
-    const [, nprefix] = message.content.match(mentionprefix);
-    const args = message.content.slice(nprefix.length).trim().split(/ +/);
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
     const cmd = args.shift().toLowerCase();
 
     // getting prefix when bot mention
@@ -34,13 +30,6 @@ client.on('messageCreate', async message => {
     const command = client.commands.get(cmd.toLowerCase());
     if (!command) return;
     if (command) {
-        // // cheking roles role only command
-        // if(command.role === true){
-        //     let role = message.member.roles.cache.find(f => f.name === "modrole")
-        //     if(!message.member.roles.cache.has(role)){
-        //         return message.reply(`You dont have role`)
-        //     }
-        // }
         // checking user perms
         if (!message.member.permissions.has(command.permissions || [])) {
             return message.reply({
@@ -50,21 +39,6 @@ client.on('messageCreate', async message => {
                         .setDescription(`** ❌ You don't Have ${command.permissions} To Run Command.. **`)
                 ]
             })
-        }
-
-        /// command cooldown  code
-        // cooldown code from tomato#6966
-        if (cooldown_op(message, command)) {
-            let timeLeft = cooldown_op(message, command)
-            return message.reply({
-                embeds: [
-                    new MessageEmbed()
-                        .setColor(ee.embed_color)
-                        .setDescription(`** You are on cooldown wait \`${timeLeft.toFixed()}\` Seconds for use \`${command.name}\` command **`)
-                ]
-            }).then(msg => setTimeout(() => {
-                msg.delete()
-            }, config.mst))
         }
         command.run(client, message, args, prefix)
     }
