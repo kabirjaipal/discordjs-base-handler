@@ -8,7 +8,7 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "KabirSingh",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^13.1.0",
