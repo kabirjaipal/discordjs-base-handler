@@ -1,0 +1,23 @@
+{
+  "name": "djshandler",
+  "version": "1.0.0",
+  "description": "a discord command and event handler based on discord.js v14",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "install": "npm install"
+  },
+  "keywords": [
+    "discord.js",
+    "discord.jsv14",
+    "discordjsv14",
+    "command-handler"
+  ],
+  "author": "KabirSingh",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/rest": "^0.4.0-dev.1648339702-520f471",
+    "discord-api-types": "^0.30.0",
+    "discord.js": "^14.0.0-dev.1648339713-520f471"
+  }
+}
