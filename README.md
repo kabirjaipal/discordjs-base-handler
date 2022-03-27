@@ -22,6 +22,5 @@ Best All in One Discord.js Handler </h1><br/>
 }
 ```
 
-<br/>
 
 If Any Bug Open Pull Request
