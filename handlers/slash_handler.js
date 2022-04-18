@@ -7,8 +7,7 @@ const {
 const fs = require("fs");
 const ee = require(`../settings/config`).embed;
 const { token, Global } = require(`../settings/config`);
-const { REST } = require("@discordjs/rest");
-const { Routes } = require("discord-api-types/v9");
+
 
 /**
  *
@@ -56,7 +55,7 @@ module.exports = async (client) => {
     // bot online
     let commands = await client.arrayOfcommands.map((cmd) => cmd);
     client.on("ready", async () => {
-    await client.application.commands.set(arrayOfcommands);
+    await client.application.commands.set(commands);
     });
 
 
