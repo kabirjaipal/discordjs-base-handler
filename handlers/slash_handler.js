@@ -56,60 +56,10 @@ module.exports = async (client) => {
     // bot online
     let commands = await client.arrayOfcommands.map((cmd) => cmd);
     client.on("ready", async () => {
-      if (Global) {
-        // code
-        await rest.put(Routes.applicationCommands(client.user.id), {
-          body: commands,
-        });
-      } else {
-        try {
-          await client.guilds.fetch().catch((e) => {});
-          await client.guilds.cache.forEach(async (guild) => {
-            await rest.put(
-              Routes.applicationGuildCommands(client.user.id, guild.id),
-              {
-                body: commands,
-              }
-            );
-          });
-        } catch (e) {
-          console.log(e);
-        }
-      }
+    await client.application.commands.set(arrayOfcommands);
     });
 
-    // guild joined
 
-    client.on("guildCreate", async (guild) => {
-      if (!guild) return;
-      let channel = guild.channels.cache.find(
-        (ch) =>
-          ch.type === "GUILD_TEXT" &&
-          ch.permissionsFor(guild.me).has("SEND_MESSAGES")
-      );
-
-      if (guild.me.permissions.has("UseApplicationCommands")) {
-        try {
-          await rest.put(
-            Routes.applicationGuildCommands(client.user.id, guild.id),
-            {
-              body: commands,
-            }
-          );
-        } catch (e) {
-          console.log(e);
-        }
-      } else {
-        channel.send(
-          `I don't have \`UseApplicationCommands\` so i can't create slash commands in your server , if you want to use me then give me \`USE_APPLICATION_COMMANDS\` and reinvite`
-        );
-      }
-    });
-
-    console.log(`${client.commands.size} Commands Loaded`);
-  } catch (e) {
-    console.log(e);
-  }
   /**
    *
    * @param {CommandInteraction} interaction
