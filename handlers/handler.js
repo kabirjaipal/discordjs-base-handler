@@ -44,7 +44,7 @@ module.exports = async (client) => {
       const properties = { directory, ...file };
       client.mcommands.set(file.name, properties);
     });
-    console.log(`${client.mcommands.size} Slash Commands Loaded`);
+    console.log(`${client.mcommands.size} Message Commands Loaded`);
   } catch (e) {
     console.log(e);
   }
