@@ -1,7 +1,8 @@
 module.exports = {
   token:
     process.env.TOKEN ||
-    "DISCORD_BOT_TOKEN",
+    "BOT_TOKEN",
+  prefix: process.env.PREFIX || "BOT_PREFIX",
   embed: {
     color: "#2f3136",
     wrongcolor: "#2f3136",
@@ -21,5 +22,5 @@ module.exports = {
     bot: "🤖",
   },
   // others
-  Global: false,
+  guildID : "" // for slash command
 };

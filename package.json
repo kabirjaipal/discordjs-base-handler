@@ -4,7 +4,7 @@
   "description": "a discord command and event handler based on discord.js v14",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node index.js"
   },
   "keywords": [
     "discord.js",
@@ -15,6 +15,7 @@
   "author": "KabirSingh",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^14.0.0-dev.1648339713-520f471"
+    "discord.js": "^14.0.0-dev.1650240532-9ef7ffd",
+    "glob": "^8.0.1"
   }
 }

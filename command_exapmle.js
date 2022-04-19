@@ -4,8 +4,7 @@ const {
   CommandInteraction,
   ApplicationCommandType,
 } = require("discord.js");
-const ee = require("../../settings/config").embed;
-const emoji = require("../../settings/config").emoji;
+const { embed: ee, emoji } = require("../../../settings/config");
 
 module.exports = {
   name: "",
@@ -32,8 +31,7 @@ const {
   ContextMenuCommandInteraction,
   ApplicationCommandType,
 } = require("discord.js");
-const ee = require("../../settings/config").embed;
-const emoji = require("../../settings/config").emoji;
+const { embed: ee, emoji } = require("../../../settings/config");
 
 module.exports = {
   name: "",
@@ -56,8 +54,7 @@ const {
   ContextMenuCommandInteraction,
   ApplicationCommandType,
 } = require("discord.js");
-const ee = require("../../settings/config").embed;
-const emoji = require("../../settings/config").emoji;
+const { embed: ee, emoji } = require("../../../settings/config");
 
 module.exports = {
   name: "",
@@ -69,6 +66,29 @@ module.exports = {
    * @param {ContextMenuCommandInteraction} interaction
    */
   run: async (client, interaction) => {
+    // Code
+  },
+};
+
+// message commands
+const { Client, Message } = require("discord.js");
+const { embed: ee, emoji } = require("../../../settings/config");
+
+module.exports = {
+  name: "",
+  description: ``,
+  userPermissions: [],
+  botPermissions: [],
+  category: "",
+  cooldown: 10,
+  /**
+   *
+   * @param {Client} client
+   * @param {Message} message
+   * @param {String[]} args
+   * @param {String} prefix
+   */
+  run: async (client, message, args, prefix) => {
     // Code
   },
 };

@@ -18,32 +18,34 @@ const client = new Client({
     repliedUser: false,
   },
   partials: [
-    Partials.Message,
-    Partials.Channel,
-    Partials.GuildMember,
-    Partials.Reaction,
-    Partials.GuildScheduledEvent,
-    Partials.User,
-    Partials.ThreadMember,
+    Partials.Message, // for message
+    Partials.Channel, // for text channel
+    Partials.GuildMember, // for guild member
+    Partials.Reaction, // for message reaction
+    Partials.GuildScheduledEvent, // for guild events
+    Partials.User, // for discord user
+    Partials.ThreadMember, // for thread member
   ],
   intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMembers,
-    // GatewayIntentBits.GuildBans,
-    // GatewayIntentBits.GuildEmojisAndStickers,
-    GatewayIntentBits.GuildIntegrations,
-    // GatewayIntentBits.GuildWebhooks,
-    // GatewayIntentBits.GuildInvites,
-    // GatewayIntentBits.GuildVoiceStates,
-    GatewayIntentBits.GuildPresences,
-    // GatewayIntentBits.GuildMessages,
-    // GatewayIntentBits.GuildMessageReactions,
-    // GatewayIntentBits.GuildMessageTyping,
-    // GatewayIntentBits.DirectMessages,
-    // GatewayIntentBits.DirectMessageReactions,
-    // GatewayIntentBits.DirectMessageTyping,
+    GatewayIntentBits.Guilds, // for guild related things
+    GatewayIntentBits.GuildMembers, // for guild members related things
+   // GatewayIntentBits.GuildBans, // for manage guild bans
+  //  GatewayIntentBits.GuildEmojisAndStickers, // for manage emojis and stickers
+    GatewayIntentBits.GuildIntegrations, // for discord Integrations
+   // GatewayIntentBits.GuildWebhooks, // for discord webhooks
+  //  GatewayIntentBits.GuildInvites, // for guild invite managing
+   // GatewayIntentBits.GuildVoiceStates, // for voice related things
+   // GatewayIntentBits.GuildPresences, // for user presence things
+    GatewayIntentBits.GuildMessages, // for guild messages things
+    GatewayIntentBits.GuildMessageReactions, // for message reactions things
+    GatewayIntentBits.GuildMessageTyping, // for message typing things
+    GatewayIntentBits.DirectMessages, // for dm messages
+    GatewayIntentBits.DirectMessageReactions, // for dm message reaction
+    GatewayIntentBits.DirectMessageTyping, // for dm message typinh
+    GatewayIntentBits.MessageContent, // enable if you need message content things
   ],
 });
+
 module.exports = client;
 
 const { token } = require("./settings/config");
@@ -51,14 +53,14 @@ const { token } = require("./settings/config");
 // Global Variables
 client.events = new Collection();
 client.cooldowns = new Collection();
-client.subcmd = new Collection();
+client.mcommands = new Collection();
 client.commands = new Collection();
 client.aliases = new Collection();
-client.categories = fs.readdirSync("./Commands/");
+client.mcategories = fs.readdirSync("./Commands/Message");
+client.scategories = fs.readdirSync("./Commands/Slash");
 
 // Initializing the project
-//Loading files, with the client variable like Command Handler, Event Handler, ...
-["event_handler", "slash_handler"].forEach((handler) => {
+["handler"].forEach((handler) => {
   require(`./handlers/${handler}`)(client);
 });
 
