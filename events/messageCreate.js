@@ -1,6 +1,6 @@
 const { cooldown } = require("../handlers/functions");
 const client = require("..");
-const { prefix: botPrefix } = require("../settings/config");
+const { prefix: botPrefix , emoji} = require("../settings/config");
 
 client.on("messageCreate", async (message) => {
   if (message.author.bot || !message.guild || !message.id) return;
