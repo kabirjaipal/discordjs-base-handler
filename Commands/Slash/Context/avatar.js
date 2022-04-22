@@ -22,12 +22,7 @@ module.exports = {
       client.users.cache.get(interaction.targetId);
 
     interaction.editReply({
-      embeds: [
-        new EmbedBuilder()
-          .setColor("Blurple")
-          .setImage(user.displayAvatarURL({ extension: "png" }))
-          .setTitle(`Avatar of ${interaction.user.tag}`),
-      ],
+      content: user.displayAvatarURL({ extension: "png", size: 2048 }),
     });
   },
 };
