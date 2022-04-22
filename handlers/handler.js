@@ -25,7 +25,9 @@ module.exports = async (client) => {
     });
     client.on("ready", async () => {
       await client.application.commands.set(arrayOfcommands);
-      client.guilds.cache.get(guildID).commands.set(arrayOfcommands);
+      if (guildID) {
+        client.guilds.cache.get(guildID).commands.set(arrayOfcommands);
+      }
     });
     console.log(`${client.commands.size} Slash Commands Loaded`);
   } catch (e) {
