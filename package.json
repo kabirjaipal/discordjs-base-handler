@@ -1,34 +1,21 @@
 {
-  "name": "jugnu",
+  "name": "djshandler",
   "version": "1.0.0",
-  "description": "a op advance discord music bot",
+  "description": "a discord command and event handler based on discord.js v14",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "node": "npm i --save-dev node@latest && npm config set prefix=$(pwd)/node_modules/node && export PATH=$(pwd)/node_modules/node/bin:$PATH"
+    "start": "node index.js"
   },
   "keywords": [
-    "music",
     "discord.js",
-    "discord-bot",
-    "music-bot"
+    "discord.jsv14",
+    "discordjsv14",
+    "command-handler"
   ],
   "author": "KabirSingh",
   "license": "ISC",
   "dependencies": {
-    "@discordjs/voice": "^0.9.0",
-    "@distube/soundcloud": "^1.1.0",
-    "@distube/spotify": "^1.2.1",
-    "@distube/yt-dlp": "^1.0.2",
-    "@joshdb/core": "^1.2.7",
-    "@joshdb/json": "^1.0.5",
-    "@joshdb/mongo": "^1.1.6",
-    "cpu-stat": "^2.0.1",
-    "discord.js": "^13.6.0",
-    "distube": "^3.3.4",
-    "ffmpeg-static": "^4.4.1",
-    "glob": "^8.0.1",
-    "libsodium-wrappers": "^0.7.10",
-    "opusscript": "^0.0.8"
+    "discord.js": "^14.0.0-dev.1650240532-9ef7ffd",
+    "glob": "^8.0.1"
   }
 }

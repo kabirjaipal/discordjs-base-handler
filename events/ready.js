@@ -6,11 +6,4 @@ client.on("ready", async () => {
     name: `@${client.user.username} /help`,
     type: "PLAYING",
   });
-
-  // loading database
-  require('../handlers/Database')(client)
-
-  client.guilds.cache.forEach(async (guild) => {
-    await client.updateembed(client, guild)
-  })
 });

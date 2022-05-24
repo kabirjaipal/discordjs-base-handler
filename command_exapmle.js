@@ -1,8 +1,10 @@
 // chat input slash commands
-const { CommandInteraction } = require("discord.js");
+const {
+  Client,
+  CommandInteraction,
+  ApplicationCommandType,
+} = require("discord.js");
 const { embed: ee, emoji } = require("../../../settings/config");
-const JUGNU = require("../../../handlers/Client");
-const { Queue } = require("distube");
 
 module.exports = {
   name: "",
@@ -11,36 +13,33 @@ module.exports = {
   botPermissions: [],
   category: "",
   cooldown: 10,
-  type: "CHAT_INPUT",
-  inVoiceChannel: false,
-  inSameVoiceChannel: false,
-  Player: false,
-  djOnly: false,
-
+  type: ApplicationCommandType.ChatInput,
   /**
    *
-   * @param {JUGNU} client
+   * @param {Client} client
    * @param {CommandInteraction} interaction
    * @param {String[]} args
-   * @param {Queue} queue
    */
-  run: async (client, interaction, args, queue) => {
+  run: async (client, interaction, args) => {
     // Code
   },
 };
 
 // message input slash commands
-const { ContextMenuCommandInteraction } = require("discord.js");
+const {
+  Client,
+  ContextMenuCommandInteraction,
+  ApplicationCommandType,
+} = require("discord.js");
 const { embed: ee, emoji } = require("../../../settings/config");
-const JUGNU = require("../../../handlers/Client");
 
 module.exports = {
   name: "",
   category: "",
-  type: "MESSAGE",
+  type: ApplicationCommandType.Message,
   /**
    *
-   * @param {JUGNU} client
+   * @param {Client} client
    * @param {ContextMenuCommandInteraction} interaction
    */
   run: async (client, interaction) => {
@@ -50,17 +49,20 @@ module.exports = {
 
 // user slash commands
 
-const { ContextMenuCommandInteraction } = require("discord.js");
+const {
+  Client,
+  ContextMenuCommandInteraction,
+  ApplicationCommandType,
+} = require("discord.js");
 const { embed: ee, emoji } = require("../../../settings/config");
-const JUGNU = require("../../../handlers/Client");
 
 module.exports = {
   name: "",
   category: "",
-  type: "USER",
+  type: ApplicationCommandType.User,
   /**
    *
-   * @param {JUGNU} client
+   * @param {Client} client
    * @param {ContextMenuCommandInteraction} interaction
    */
   run: async (client, interaction) => {
@@ -69,32 +71,24 @@ module.exports = {
 };
 
 // message commands
-const { Message } = require("discord.js");
-const JUGNU = require("../../../handlers/Client");
-const { Queue } = require("distube");
+const { Client, Message } = require("discord.js");
+const { embed: ee, emoji } = require("../../../settings/config");
 
 module.exports = {
   name: "",
-  aliases : [],
   description: ``,
   userPermissions: [],
   botPermissions: [],
   category: "",
   cooldown: 10,
-  inVoiceChannel: false,
-  inSameVoiceChannel: false,
-  Player: false,
-  djOnly: false,
-
   /**
    *
-   * @param {JUGNU} client
+   * @param {Client} client
    * @param {Message} message
    * @param {String[]} args
    * @param {String} prefix
-   * @param {Queue} queue
    */
-  run: async (client, message, args, prefix, queue) => {
+  run: async (client, message, args, prefix) => {
     // Code
   },
 };

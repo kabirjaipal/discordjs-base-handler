@@ -1,13 +1,10 @@
-const { cooldown, check_dj, databasing } = require("../handlers/functions");
+const { cooldown } = require("../handlers/functions");
 const client = require("..");
-const { PREFIX: botPrefix, emoji } = require("../settings/config");
-const { Permissions } = require("discord.js");
+const { prefix: botPrefix , emoji} = require("../settings/config");
 
 client.on("messageCreate", async (message) => {
   if (message.author.bot || !message.guild || !message.id) return;
-  await databasing(message.guildId, message.author.id);
-  let settings = await client.music.get(message.guild.id);
-  let prefix = settings?.prefix || botPrefix;
+  let prefix = botPrefix;
   let mentionprefix = new RegExp(
     `^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`
   );
@@ -28,60 +25,26 @@ client.on("messageCreate", async (message) => {
     client.mcommands.find((cmds) => cmds.aliases && cmds.aliases.includes(cmd));
   if (!command) return;
   if (command) {
-    let queue = client.distube.getQueue(message.guild.id);
-    let voiceChannel = message.member.voice.channel;
-    let botChannel = message.guild.me.voice.channel;
-    let checkDJ = await check_dj(client, message.member, queue?.songs[0]);
-
-    if (
-      !message.member.permissions.has(
-        Permissions.FLAGS[command.userPermissions] || []
-      )
-    ) {
+    if (!message.member.permissions.has(command.userPermissions || [])) {
       return client.embed(
         message,
-        `You Don't Have \`${command.userPermissions}\` Permission to Use \`${command.name}\` Command!!`
+        `${emoji.ERROR} You must have the \`${command.userPermissions}\` permission to use \`${command.name}\` command!`
       );
-    } else if (
-      !message.guild.me.permissions.has(
-        Permissions.FLAGS[command.botPermissions] || []
-      )
-    ) {
+    } else if (!message.member.permissions.has(command.botPermissions || [])) {
       return client.embed(
         message,
-        `I Don't Have \`${command.botPermissions}\` Permission to Use \`${command.name}\` Command!!`
+        `${emoji.ERROR} I must have the \`${command.botPermissions}\` permission to use \`${command.name}\` command!`
       );
     } else if (cooldown(message, command)) {
       return client.embed(
         message,
-        ` You are On Cooldown , wait \`${cooldown(
+        `*You are On Cooldown , wait \`${cooldown(
           message,
           command
-        ).toFixed()}\` Seconds`
-      );
-    } else if (command.inVoiceChannel && !voiceChannel) {
-      return client.embed(
-        message,
-        `${emoji.ERROR} You Need to Join Voice Channel`
-      );
-    } else if (
-      command.inSameVoiceChannel &&
-      botChannel &&
-      !botChannel?.equals(voiceChannel)
-    ) {
-      return client.embed(
-        message,
-        `${emoji.ERROR} You Need to Join ${botChannel} Voice Channel`
-      );
-    } else if (command.Player && !queue) {
-      return client.embed(message, `${emoji.ERROR} Music Not Playing`);
-    } else if (command.djOnly && checkDJ) {
-      return client.embed(
-        message,
-        `${emoji.ERROR} You are not DJ and also you are not song requester..`
+        ).toFixed()}\` Seconds*`
       );
     } else {
-      command.run(client, message, args, nprefix, queue);
+      command.run(client, message, args, nprefix);
     }
   }
 });

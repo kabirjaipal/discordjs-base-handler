@@ -1,29 +1,22 @@
-const { CommandInteraction } = require("discord.js");
-const JUGNU = require("../../../handlers/Client");
-const { Queue } = require("distube");
+const { Client, CommandInteraction } = require("discord.js");
+const { embed: ee, emoji } = require("../../../settings/config");
 
 module.exports = {
+  // options
   name: "ping",
   description: `get ping of bot`,
   userPermissions: ["SEND_MESSAGES"],
-  botPermissions: ["EMBED_LINKS"],
+  botPermissions: ["SEND_MESSAGES"],
   category: "Information",
-  cooldown: 5,
-  type: "CHAT_INPUT",
-  inVoiceChannel: false,
-  inSameVoiceChannel: false,
-  Player: false,
-  djOnly: false,
-
+  cooldown: 10,
+  // command start
   /**
    *
-   * @param {JUGNU} client
+   * @param {Client} client
    * @param {CommandInteraction} interaction
-   * @param {String[]} args
-   * @param {Queue} queue
    */
-  run: async (client, interaction, args, queue) => {
+  run: async (client, interaction) => {
     // Code
-    client.embed(interaction, `Ping :: \`${client.ws.ping}\``);
+    interaction.followUp({ content: `Pong`, ephemeral: true });
   },
 };

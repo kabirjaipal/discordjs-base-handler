@@ -1,30 +1,22 @@
-const { Message } = require("discord.js");
-const JUGNU = require("../../../handlers/Client");
-const { Queue } = require("distube");
+const { Client, Message } = require("discord.js");
+const { embed: ee, emoji } = require("../../../settings/config");
 
 module.exports = {
   name: "ping",
-  aliases: ["latancy"],
   description: `get ping of bot`,
-  userPermissions: ['SEND_MESSAGES'],
-  botPermissions: ['EMBED_LINKS'],
-  category: "Information",
-  cooldown: 5,
-  inVoiceChannel: false,
-  inSameVoiceChannel: false,
-  Player: false,
-  djOnly: false,
-
+  userPermissions: [],
+  botPermissions: [],
+  category: 'Information',
+  cooldown: 10,
   /**
    *
-   * @param {JUGNU} client
+   * @param {Client} client
    * @param {Message} message
    * @param {String[]} args
    * @param {String} prefix
-   * @param {Queue} queue
    */
-  run: async (client, message, args, prefix, queue) => {
+  run: async (client, message, args, prefix) => {
     // Code
-    client.embed(message, `Ping :: \`${client.ws.ping}\``);
+    client.embed(message,`Ping :: \`${client.ws.ping}\``)
   },
 };

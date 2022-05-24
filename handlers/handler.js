@@ -1,11 +1,12 @@
 const { glob } = require("glob");
 const { promisify } = require("util");
+const { Client, EmbedBuilder } = require("discord.js");
 const globPromise = promisify(glob);
-const JUGNU = require("./Client");
+const { embed: ee, emoji, guildID } = require("../settings/config");
 
 /**
  *
- * @param {JUGNU} client
+ * @param {Client} client
  */
 module.exports = async (client) => {
   // LOADING SLASH COMMANDS
@@ -22,14 +23,12 @@ module.exports = async (client) => {
       client.commands.set(file.name, properties);
       arrayOfcommands.push(file);
     });
-
     client.on("ready", async () => {
       await client.application.commands.set(arrayOfcommands);
-      // let guild = client.guilds.cache.get(client.config.guildID)
-      // await guild.commands.set(arrayOfcommands)
-
+      if (guildID) {
+        client.guilds.cache.get(guildID).commands.set(arrayOfcommands);
+      }
     });
-
     console.log(`${client.commands.size} Slash Commands Loaded`);
   } catch (e) {
     console.log(e);
@@ -46,10 +45,7 @@ module.exports = async (client) => {
       const directory = splitted[splitted.length - 2];
       const properties = { directory, ...file };
       client.mcommands.set(file.name, properties);
-      if (file.aliases && Array.isArray(file.aliases))
-        file.aliases.forEach((a) => client.aliases.set(a, file.name));
     });
-
     console.log(`${client.mcommands.size} Message Commands Loaded`);
   } catch (e) {
     console.log(e);
@@ -62,4 +58,37 @@ module.exports = async (client) => {
   } catch (e) {
     console.log(e);
   }
+
+  client.embed = (interaction, data) => {
+    let user = interaction.user ? interaction.user : interaction.author;
+    if (interaction.deferred) {
+      interaction
+        .followUp({
+          embeds: [
+            new EmbedBuilder()
+              .setColor(ee.color)
+              .setDescription(` ** ${data.substring(0, 3000)} **`)
+              .setFooter({
+                text: user.tag,
+                iconURL: user.displayAvatarURL({ dynamic: true }),
+              }),
+          ],
+        })
+        .catch((e) => {});
+    } else {
+      interaction
+        .reply({
+          embeds: [
+            new EmbedBuilder()
+              .setColor(ee.color)
+              .setDescription(` ** ${data.substring(0, 3000)} **`)
+              .setFooter({
+                text: user.tag,
+                iconURL: user.displayAvatarURL({ dynamic: true }),
+              }),
+          ],
+        })
+        .catch((e) => {});
+    }
+  };
 };
