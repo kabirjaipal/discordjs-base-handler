@@ -3,17 +3,17 @@ const JUGNU = require("../../../handlers/Client");
 const { Queue } = require("distube");
 
 module.exports = {
-  name: "ping",
-  description: `get ping of bot`,
-  userPermissions: ["SEND_MESSAGES"],
-  botPermissions: ["EMBED_LINKS"],
-  category: "Information",
+  name: "autoplay",
+  description: `toggle autoplay on/off`,
+  userPermissions: ["CONNECT"],
+  botPermissions: ["CONNECT"],
+  category: "Music",
   cooldown: 5,
   type: "CHAT_INPUT",
-  inVoiceChannel: false,
-  inSameVoiceChannel: false,
-  Player: false,
-  djOnly: false,
+  inVoiceChannel: true,
+  inSameVoiceChannel: true,
+  Player: true,
+  djOnly: true,
 
   /**
    *
@@ -24,6 +24,11 @@ module.exports = {
    */
   run: async (client, interaction, args, queue) => {
     // Code
-    client.embed(interaction, `Ping :: \`${client.ws.ping}\``);
+    let autoplay = queue.toggleAutoplay();
+
+    client.embed(
+      interaction,
+      `${client.config.emoji.SUCCESS} AutoPlay: \`${autoplay ? "On" : "Off"}\``
+    );
   },
 };

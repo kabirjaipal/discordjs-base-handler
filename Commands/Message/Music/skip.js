@@ -3,17 +3,17 @@ const JUGNU = require("../../../handlers/Client");
 const { Queue } = require("distube");
 
 module.exports = {
-  name: "ping",
-  aliases: ["latancy"],
-  description: `get ping of bot`,
-  userPermissions: ['SEND_MESSAGES'],
-  botPermissions: ['EMBED_LINKS'],
-  category: "Information",
+  name: "skip",
+  aliases: ["s", "skp"],
+  description: `skip to next song in queue`,
+  userPermissions: ["CONNECT"],
+  botPermissions: ["CONNECT"],
+  category: "Music",
   cooldown: 5,
-  inVoiceChannel: false,
-  inSameVoiceChannel: false,
-  Player: false,
-  djOnly: false,
+  inVoiceChannel: true,
+  inSameVoiceChannel: true,
+  Player: true,
+  djOnly: true,
 
   /**
    *
@@ -25,6 +25,7 @@ module.exports = {
    */
   run: async (client, message, args, prefix, queue) => {
     // Code
-    client.embed(message, `Ping :: \`${client.ws.ping}\``);
+    await queue.skip().catch((e) => null);
+    client.embed(message, `${client.config.emoji.SUCCESS}  Song Skipped !!`);
   },
 };

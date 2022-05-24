@@ -3,15 +3,15 @@ const JUGNU = require("../../../handlers/Client");
 const { Queue } = require("distube");
 
 module.exports = {
-  name: "ping",
-  description: `get ping of bot`,
-  userPermissions: ["SEND_MESSAGES"],
+  name: "reset",
+  description: `reset bot to default settings`,
+  userPermissions: ["MANAGE_GUILD"],
   botPermissions: ["EMBED_LINKS"],
-  category: "Information",
+  category: "Settings",
   cooldown: 5,
   type: "CHAT_INPUT",
-  inVoiceChannel: false,
-  inSameVoiceChannel: false,
+  inVoiceChannel: true,
+  inSameVoiceChannel: true,
   Player: false,
   djOnly: false,
 
@@ -24,6 +24,7 @@ module.exports = {
    */
   run: async (client, interaction, args, queue) => {
     // Code
-    client.embed(interaction, `Ping :: \`${client.ws.ping}\``);
+    await client.music.delete(interaction.guildId)
+    client.embed(interaction,`${client.config.emoji.SUCCESS} Reseted Done !!`)
   },
 };

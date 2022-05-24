@@ -3,17 +3,17 @@ const JUGNU = require("../../../handlers/Client");
 const { Queue } = require("distube");
 
 module.exports = {
-  name: "ping",
-  aliases: ["latancy"],
-  description: `get ping of bot`,
-  userPermissions: ['SEND_MESSAGES'],
-  botPermissions: ['EMBED_LINKS'],
-  category: "Information",
+  name: "stop",
+  aliases: ["st", "destroy"],
+  description: `destroy current queue of server`,
+  userPermissions: ["CONNECT"],
+  botPermissions: ["CONNECT"],
+  category: "Music",
   cooldown: 5,
-  inVoiceChannel: false,
-  inSameVoiceChannel: false,
-  Player: false,
-  djOnly: false,
+  inVoiceChannel: true,
+  inSameVoiceChannel: true,
+  Player: true,
+  djOnly: true,
 
   /**
    *
@@ -25,6 +25,7 @@ module.exports = {
    */
   run: async (client, message, args, prefix, queue) => {
     // Code
-    client.embed(message, `Ping :: \`${client.ws.ping}\``);
+    queue.stop();
+    client.embed(message, `${client.config.emoji.SUCCESS} Queue Destroyed !!`);
   },
 };

@@ -3,9 +3,9 @@ const JUGNU = require("../../../handlers/Client");
 const { Queue } = require("distube");
 
 module.exports = {
-  name: "ping",
-  aliases: ["latancy"],
-  description: `get ping of bot`,
+  name: "uptime",
+  aliases: ["up"],
+  description: `see when bot comes online`,
   userPermissions: ['SEND_MESSAGES'],
   botPermissions: ['EMBED_LINKS'],
   category: "Information",
@@ -25,6 +25,6 @@ module.exports = {
    */
   run: async (client, message, args, prefix, queue) => {
     // Code
-    client.embed(message, `Ping :: \`${client.ws.ping}\``);
+    client.embed(message, `Uptime :: <t:${Math.floor(Date.now() / 1000 - client.uptime / 1000)}:R>`);
   },
 };

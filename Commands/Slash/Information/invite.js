@@ -1,10 +1,11 @@
 const { CommandInteraction } = require("discord.js");
 const JUGNU = require("../../../handlers/Client");
 const { Queue } = require("distube");
+const { links } = require("../../../settings/config");
 
 module.exports = {
-  name: "ping",
-  description: `get ping of bot`,
+  name: "invite",
+  description: `Get My Invite Link to add me`,
   userPermissions: ["SEND_MESSAGES"],
   botPermissions: ["EMBED_LINKS"],
   category: "Information",
@@ -24,6 +25,12 @@ module.exports = {
    */
   run: async (client, interaction, args, queue) => {
     // Code
-    client.embed(interaction, `Ping :: \`${client.ws.ping}\``);
+    client.embed(
+        interaction,
+        `[\`Click to Invite Me\`](${links.inviteURL.replace(
+          "BOTID",
+          client.user.id
+        )})`
+      );
   },
 };
