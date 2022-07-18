@@ -5,7 +5,7 @@ const { emoji } = require("../settings/config");
 
 client.on("interactionCreate", async (interaction) => {
   // Slash Command Handling
-  if (interaction.isCommand()) {
+  if (interaction.isChatInputCommand()) {
     await interaction.deferReply({ ephemeral: true }).catch((e) => {});
     const cmd = client.commands.get(interaction.commandName);
     if (!cmd)
@@ -25,7 +25,6 @@ client.on("interactionCreate", async (interaction) => {
     interaction.member = interaction.guild.members.cache.get(
       interaction.user.id
     );
-
     if (cmd) {
       // checking user perms
       if (!interaction.member.permissions.has(cmd.userPermissions || [])) {
@@ -34,7 +33,7 @@ client.on("interactionCreate", async (interaction) => {
           `You Don't Have \`${cmd.userPermissions}\` Permission to Use \`${cmd.name}\` Command!!`
         );
       } else if (
-        !interaction.guild.me.permissions.has(cmd.botPermissions || [])
+        !interaction.guild.members.me.permissions.has(cmd.botPermissions || [])
       ) {
         return client.embed(
           interaction,

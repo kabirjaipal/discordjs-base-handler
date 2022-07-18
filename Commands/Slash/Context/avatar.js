@@ -1,18 +1,16 @@
 const {
-  Client,
   ContextMenuCommandInteraction,
   ApplicationCommandType,
-  EmbedBuilder,
 } = require("discord.js");
-const { embed: ee, emoji } = require("../../../settings/config");
+const BOT = require("../../../handlers/Client");
 
 module.exports = {
-  name: "get_avatar",
+  name: "avatar",
   category: "Context",
   type: ApplicationCommandType.User,
   /**
    *
-   * @param {Client} client
+   * @param {BOT} client
    * @param {ContextMenuCommandInteraction} interaction
    */
   run: async (client, interaction) => {

@@ -1,6 +1,6 @@
 const { cooldown } = require("../handlers/functions");
 const client = require("..");
-const { prefix: botPrefix , emoji} = require("../settings/config");
+const { prefix: botPrefix, emoji } = require("../settings/config");
 
 client.on("messageCreate", async (message) => {
   if (message.author.bot || !message.guild || !message.id) return;
@@ -30,7 +30,9 @@ client.on("messageCreate", async (message) => {
         message,
         `${emoji.ERROR} You must have the \`${command.userPermissions}\` permission to use \`${command.name}\` command!`
       );
-    } else if (!message.member.permissions.has(command.botPermissions || [])) {
+    } else if (
+      !message.guild.members.me.permissions.has(command.botPermissions || [])
+    ) {
       return client.embed(
         message,
         `${emoji.ERROR} I must have the \`${command.botPermissions}\` permission to use \`${command.name}\` command!`

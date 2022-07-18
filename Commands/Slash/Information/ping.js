@@ -1,5 +1,5 @@
-const { Client, CommandInteraction } = require("discord.js");
-const { embed: ee, emoji } = require("../../../settings/config");
+const { CommandInteraction } = require("discord.js");
+const BOT = require("../../../handlers/Client");
 
 module.exports = {
   // options
@@ -12,11 +12,11 @@ module.exports = {
   // command start
   /**
    *
-   * @param {Client} client
+   * @param {BOT} client
    * @param {CommandInteraction} interaction
    */
   run: async (client, interaction) => {
     // Code
-    interaction.followUp({ content: `Pong`, ephemeral: true });
+    client.embed(interaction,`Ping :: \`${client.ws.ping}\``)
   },
 };

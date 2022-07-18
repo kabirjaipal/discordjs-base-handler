@@ -39,7 +39,7 @@ a discord.js handler which support slash commands , message commands , events an
 - support event Handler
 - slash commands support
 - message commands support
-- based on [discord.js v14](https://deploy-preview-1011--discordjs-guide.netlify.app/additional-info/changes-in-v14.html)
+- based on [discord.js](https://discord.js.org/#/)
 - provied code snipet for commands
 - support sub directory in commands folder
 - support code suggestions in Handler
