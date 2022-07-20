@@ -52,14 +52,11 @@ If you have any feedback, please reach out to us at [Discord Server](https://dis
 
 ## Usage/Examples
 
-- For Slash Command
+- Commands Example
 ```javascript
-const {
-  Client,
-  CommandInteraction,
-  ApplicationCommandType,
-} = require("discord.js");
-const { embed: ee, emoji } = require("../../../settings/config");
+// chat input slash commands
+const { CommandInteraction, ApplicationCommandType } = require("discord.js");
+const BOT = require("../../../handlers/Client");
 
 module.exports = {
   name: "",
@@ -71,7 +68,7 @@ module.exports = {
   type: ApplicationCommandType.ChatInput,
   /**
    *
-   * @param {Client} client
+   * @param {BOT} client
    * @param {CommandInteraction} interaction
    * @param {String[]} args
    */
@@ -79,11 +76,53 @@ module.exports = {
     // Code
   },
 };
-```
-- for Message Command
-```javascript
-const { Client, Message } = require("discord.js");
-const { embed: ee, emoji } = require("../../../settings/config");
+
+// message input slash commands
+const {
+  ContextMenuCommandInteraction,
+  ApplicationCommandType,
+} = require("discord.js");
+const BOT = require("../../../handlers/Client");
+
+module.exports = {
+  name: "",
+  category: "",
+  type: ApplicationCommandType.Message,
+  /**
+   *
+   * @param {BOT} client
+   * @param {ContextMenuCommandInteraction} interaction
+   */
+  run: async (client, interaction) => {
+    // Code
+  },
+};
+
+// user slash commands
+
+const {
+  ContextMenuCommandInteraction,
+  ApplicationCommandType,
+} = require("discord.js");
+const BOT = require("../../../handlers/Client");
+
+module.exports = {
+  name: "",
+  category: "",
+  type: ApplicationCommandType.User,
+  /**
+   *
+   * @param {BOT} client
+   * @param {ContextMenuCommandInteraction} interaction
+   */
+  run: async (client, interaction) => {
+    // Code
+  },
+};
+
+// message commands
+const { Message } = require("discord.js");
+const BOT = require("../../../handlers/Client");
 
 module.exports = {
   name: "",
@@ -94,7 +133,7 @@ module.exports = {
   cooldown: 10,
   /**
    *
-   * @param {Client} client
+   * @param {BOT} client
    * @param {Message} message
    * @param {String[]} args
    * @param {String} prefix
@@ -103,6 +142,7 @@ module.exports = {
     // Code
   },
 };
+
 ```
 
 ## License
