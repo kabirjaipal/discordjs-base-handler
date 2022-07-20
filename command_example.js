@@ -1,10 +1,6 @@
 // chat input slash commands
-const {
-  Client,
-  CommandInteraction,
-  ApplicationCommandType,
-} = require("discord.js");
-const { embed: ee, emoji } = require("../../../settings/config");
+const { CommandInteraction, ApplicationCommandType } = require("discord.js");
+const BOT = require("../../../handlers/Client");
 
 module.exports = {
   name: "",
@@ -16,7 +12,7 @@ module.exports = {
   type: ApplicationCommandType.ChatInput,
   /**
    *
-   * @param {Client} client
+   * @param {BOT} client
    * @param {CommandInteraction} interaction
    * @param {String[]} args
    */
@@ -27,11 +23,10 @@ module.exports = {
 
 // message input slash commands
 const {
-  Client,
   ContextMenuCommandInteraction,
   ApplicationCommandType,
 } = require("discord.js");
-const { embed: ee, emoji } = require("../../../settings/config");
+const BOT = require("../../../handlers/Client");
 
 module.exports = {
   name: "",
@@ -39,7 +34,7 @@ module.exports = {
   type: ApplicationCommandType.Message,
   /**
    *
-   * @param {Client} client
+   * @param {BOT} client
    * @param {ContextMenuCommandInteraction} interaction
    */
   run: async (client, interaction) => {
@@ -50,11 +45,10 @@ module.exports = {
 // user slash commands
 
 const {
-  Client,
   ContextMenuCommandInteraction,
   ApplicationCommandType,
 } = require("discord.js");
-const { embed: ee, emoji } = require("../../../settings/config");
+const BOT = require("../../../handlers/Client");
 
 module.exports = {
   name: "",
@@ -62,7 +56,7 @@ module.exports = {
   type: ApplicationCommandType.User,
   /**
    *
-   * @param {Client} client
+   * @param {BOT} client
    * @param {ContextMenuCommandInteraction} interaction
    */
   run: async (client, interaction) => {
@@ -71,8 +65,8 @@ module.exports = {
 };
 
 // message commands
-const { Client, Message } = require("discord.js");
-const { embed: ee, emoji } = require("../../../settings/config");
+const { Message } = require("discord.js");
+const BOT = require("../../../handlers/Client");
 
 module.exports = {
   name: "",
@@ -83,7 +77,7 @@ module.exports = {
   cooldown: 10,
   /**
    *
-   * @param {Client} client
+   * @param {BOT} client
    * @param {Message} message
    * @param {String[]} args
    * @param {String} prefix
