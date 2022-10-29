@@ -77,37 +77,4 @@ module.exports = async (client) => {
   } catch (e) {
     console.log(e);
   }
-
-  client.embed = (interaction, data) => {
-    let user = interaction.user ? interaction.user : interaction.author;
-    if (interaction.deferred) {
-      interaction
-        .followUp({
-          embeds: [
-            new EmbedBuilder()
-              .setColor(ee.color)
-              .setDescription(` ** ${data.substring(0, 3000)} **`)
-              .setFooter({
-                text: user.tag,
-                iconURL: user.displayAvatarURL({ dynamic: true }),
-              }),
-          ],
-        })
-        .catch((e) => {});
-    } else {
-      interaction
-        .reply({
-          embeds: [
-            new EmbedBuilder()
-              .setColor(ee.color)
-              .setDescription(` ** ${data.substring(0, 3000)} **`)
-              .setFooter({
-                text: user.tag,
-                iconURL: user.displayAvatarURL({ dynamic: true }),
-              }),
-          ],
-        })
-        .catch((e) => {});
-    }
-  };
 };

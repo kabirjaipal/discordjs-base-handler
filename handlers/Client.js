@@ -3,6 +3,7 @@ const {
   Collection,
   GatewayIntentBits,
   Partials,
+  EmbedBuilder,
 } = require("discord.js");
 const fs = require("fs");
 
@@ -55,7 +56,45 @@ class BOT extends Client {
     this.aliases = new Collection();
     this.mcategories = fs.readdirSync("./Commands/Message");
     this.scategories = fs.readdirSync("./Commands/Slash");
-    this.config = require('../settings/config')
+    this.config = require("../settings/config");
+    this.getFooter = (user) => {
+      return {
+        text: `Requested By ${user.tag}`,
+        iconURL: user.displayAvatarURL(),
+      };
+    };
+    this.getAuthor = (user) => {
+      return {
+        text: user.tag,
+        iconURL: user.displayAvatarURL(),
+      };
+    };
+    this.embed = (interaction, data) => {
+      let user = interaction.user ? interaction.user : interaction.author;
+      if (interaction.deferred) {
+        interaction
+          .followUp({
+            embeds: [
+              new EmbedBuilder()
+                .setColor(this.config.embed.color)
+                .setDescription(`${data.substring(0, 3000)}`)
+                .setFooter(this.getFooter(user)),
+            ],
+          })
+          .catch((e) => {});
+      } else {
+        interaction
+          .reply({
+            embeds: [
+              new EmbedBuilder()
+                .setColor(this.config.embed.color)
+                .setDescription(`${data.substring(0, 3000)}`)
+                .setFooter(this.getFooter(user)),
+            ],
+          })
+          .catch((e) => {});
+      }
+    };
   }
 
   build(token) {
