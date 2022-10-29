@@ -1,4 +1,4 @@
-const { CommandInteraction } = require("discord.js");
+const { CommandInteraction, ApplicationCommandType } = require("discord.js");
 const BOT = require("../../../handlers/Client");
 
 module.exports = {
@@ -8,6 +8,7 @@ module.exports = {
   userPermissions: ["SEND_MESSAGES"],
   botPermissions: ["SEND_MESSAGES"],
   category: "Information",
+  type: ApplicationCommandType.ChatInput,
   cooldown: 10,
   // command start
   /**
@@ -17,6 +18,6 @@ module.exports = {
    */
   run: async (client, interaction) => {
     // Code
-    client.embed(interaction,`Ping :: \`${client.ws.ping}\``)
+    client.embed(interaction, `Ping :: \`${client.ws.ping}\``);
   },
 };
