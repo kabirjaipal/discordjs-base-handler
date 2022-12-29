@@ -1,6 +1,7 @@
-const { cooldown } = require("../handlers/functions");
+const { cooldown, getKeyByValue } = require("../handlers/functions");
 const client = require("..");
 const { prefix: botPrefix, emoji } = require("../settings/config");
+const { PermissionFlagsBits } = require("discord.js");
 
 client.on("messageCreate", async (message) => {
   if (message.author.bot || !message.guild || !message.id) return;
@@ -14,7 +15,7 @@ client.on("messageCreate", async (message) => {
   const cmd = args.shift().toLowerCase();
   if (cmd.length === 0) {
     if (nprefix.includes(client.user.id)) {
-      client.embed(
+      client.sendEmbed(
         message,
         ` ${emoji.SUCCESS} To See My All Commands Type  \`/help\` or \`${prefix}help\``
       );
@@ -25,20 +26,26 @@ client.on("messageCreate", async (message) => {
     client.mcommands.find((cmds) => cmds.aliases && cmds.aliases.includes(cmd));
   if (!command) return;
   if (command) {
-    if (!message.member.permissions.has(command.userPermissions || [])) {
-      return client.embed(
+    if (!message.member.permissions.has(command.userPermissions || null)) {
+      return client.sendEmbed(
         message,
-        `${emoji.ERROR} You must have the \`${command.userPermissions}\` permission to use \`${command.name}\` command!`
+        `${emoji.ERROR} You must have the \`${getKeyByValue(
+          PermissionFlagsBits,
+          command.userPermissions
+        )}\` permission to use \`${command.name}\` command!`
       );
     } else if (
-      !message.guild.members.me.permissions.has(command.botPermissions || [])
+      !message.guild.members.me.permissions.has(command.botPermissions || null)
     ) {
-      return client.embed(
+      return client.sendEmbed(
         message,
-        `${emoji.ERROR} I must have the \`${command.botPermissions}\` permission to use \`${command.name}\` command!`
+        `${emoji.ERROR} I must have the  \`${getKeyByValue(
+          PermissionFlagsBits,
+          command.botPermissions
+        )}\` permission to use \`${command.name}\` command!`
       );
     } else if (cooldown(message, command)) {
-      return client.embed(
+      return client.sendEmbed(
         message,
         `*You are On Cooldown , wait \`${cooldown(
           message,

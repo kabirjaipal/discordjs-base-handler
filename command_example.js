@@ -1,12 +1,16 @@
 // chat input slash commands
-const { CommandInteraction, ApplicationCommandType } = require("discord.js");
+const {
+  CommandInteraction,
+  ApplicationCommandType,
+  PermissionFlagsBits,
+} = require("discord.js");
 const BOT = require("../../../handlers/Client");
 
 module.exports = {
   name: "",
   description: ``,
-  userPermissions: [],
-  botPermissions: [],
+  userPermissions: PermissionFlagsBits.SendMessages,
+  botPermissions: PermissionFlagsBits.SendMessages,
   category: "",
   cooldown: 10,
   type: ApplicationCommandType.ChatInput,
@@ -65,14 +69,14 @@ module.exports = {
 };
 
 // message commands
-const { Message } = require("discord.js");
+const { Message, PermissionFlagsBits } = require("discord.js");
 const BOT = require("../../../handlers/Client");
 
 module.exports = {
   name: "",
   description: ``,
-  userPermissions: [],
-  botPermissions: [],
+  userPermissions: PermissionFlagsBits.SendMessages,
+  botPermissions: PermissionFlagsBits.SendMessages,
   category: "",
   cooldown: 10,
   /**

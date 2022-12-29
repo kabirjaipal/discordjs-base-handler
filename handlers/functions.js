@@ -1,6 +1,4 @@
 const { Interaction, Collection } = require("discord.js");
-const { embed: ee, emoji } = require("../settings/config");
-const client = require("../index");
 
 /**
  *
@@ -33,6 +31,18 @@ function cooldown(interaction, cmd) {
     return false;
   }
 }
+
+/**
+ *
+ * @param {{}} object
+ * @param {String} value
+ * @returns
+ */
+function getKeyByValue(object, value) {
+  return Object.keys(object).find((key) => object[key] === value);
+}
+
 module.exports = {
   cooldown,
+  getKeyByValue,
 };

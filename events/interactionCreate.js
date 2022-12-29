@@ -1,15 +1,18 @@
-const { ApplicationCommandOptionType } = require("discord.js");
+const {
+  ApplicationCommandOptionType,
+  PermissionFlagsBits,
+} = require("discord.js");
 const client = require("..");
-const { cooldown } = require("../handlers/functions");
+const { cooldown, getKeyByValue } = require("../handlers/functions");
 const { emoji } = require("../settings/config");
 
 client.on("interactionCreate", async (interaction) => {
   // Slash Command Handling
   if (interaction.isChatInputCommand()) {
-    await interaction.deferReply({ ephemeral: true }).catch((e) => {});
+    await interaction.deferReply().catch((e) => {});
     const cmd = client.commands.get(interaction.commandName);
     if (!cmd)
-      return client.embed(
+      return client.sendEmbed(
         interaction,
         `${emoji.ERROR} \`${interaction.commandName}\` Command Not Found `
       );
@@ -28,19 +31,25 @@ client.on("interactionCreate", async (interaction) => {
     if (cmd) {
       // checking user perms
       if (!interaction.member.permissions.has(cmd.userPermissions || [])) {
-        return client.embed(
+        return client.sendEmbed(
           interaction,
-          `You Don't Have \`${cmd.userPermissions}\` Permission to Use \`${cmd.name}\` Command!!`
+          `You Don't Have  \`${getKeyByValue(
+            PermissionFlagsBits,
+            cmd.userPermissions
+          )}\` Permission to Use \`${cmd.name}\` Command!!`
         );
       } else if (
         !interaction.guild.members.me.permissions.has(cmd.botPermissions || [])
       ) {
-        return client.embed(
+        return client.sendEmbed(
           interaction,
-          `I Don't Have \`${cmd.botPermissions}\` Permission to Use \`${cmd.name}\` Command!!`
+          `I Don't Have  \`${getKeyByValue(
+            PermissionFlagsBits,
+            cmd.botPermissions
+          )}\` Permission to Use \`${cmd.name}\` Command!!`
         );
       } else if (cooldown(interaction, cmd)) {
-        return client.embed(
+        return client.sendEmbed(
           interaction,
           ` You are On Cooldown , wait \`${cooldown(
             interaction,

@@ -1,15 +1,10 @@
-
 # Hi, I'm Kabir! 👋
 
-
 I'm a Discord Bot Developer and here is mine bot handler
-
 
 # Discord.JS V14 Handler
 
 a discord.js handler which support slash commands , message commands , events and more...
-
-
 
 ## **Installation | How to use the Bot**
 
@@ -44,25 +39,28 @@ a discord.js handler which support slash commands , message commands , events an
 - support sub directory in commands folder
 - support code suggestions in Handler
 
-
 ## Feedback
 
 If you have any feedback, please reach out to us at [Discord Server](https://discord.gg/PcUVWApWN3)
 
-
 ## Usage/Examples
 
 - Commands Example
+
 ```javascript
 // chat input slash commands
-const { CommandInteraction, ApplicationCommandType } = require("discord.js");
+const {
+  CommandInteraction,
+  ApplicationCommandType,
+  PermissionFlagsBits,
+} = require("discord.js");
 const BOT = require("../../../handlers/Client");
 
 module.exports = {
   name: "",
   description: ``,
-  userPermissions: [],
-  botPermissions: [],
+  userPermissions: PermissionFlagsBits.SendMessages,
+  botPermissions: PermissionFlagsBits.SendMessages,
   category: "",
   cooldown: 10,
   type: ApplicationCommandType.ChatInput,
@@ -78,22 +76,24 @@ module.exports = {
 };
 
 // message input slash commands
-const {
-  ContextMenuCommandInteraction,
-  ApplicationCommandType,
-} = require("discord.js");
+const { Message, PermissionFlagsBits } = require("discord.js");
 const BOT = require("../../../handlers/Client");
 
 module.exports = {
   name: "",
+  description: ``,
+  userPermissions: PermissionFlagsBits.SendMessages,
+  botPermissions: PermissionFlagsBits.SendMessages,
   category: "",
-  type: ApplicationCommandType.Message,
+  cooldown: 10,
   /**
    *
    * @param {BOT} client
-   * @param {ContextMenuCommandInteraction} interaction
+   * @param {Message} message
+   * @param {String[]} args
+   * @param {String} prefix
    */
-  run: async (client, interaction) => {
+  run: async (client, message, args, prefix) => {
     // Code
   },
 };
@@ -142,7 +142,6 @@ module.exports = {
     // Code
   },
 };
-
 ```
 
 ## License

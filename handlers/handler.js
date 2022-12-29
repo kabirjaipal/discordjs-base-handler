@@ -1,4 +1,3 @@
-const { EmbedBuilder } = require("discord.js");
 const fs = require("fs");
 const BOT = require("./Client");
 
@@ -7,7 +6,7 @@ const BOT = require("./Client");
  * @param {BOT} client
  */
 module.exports = async (client) => {
-  const { guildID, embed: ee } = client.config;
+  const { guildID, slash } = client.config;
   // LOADING SLASH COMMANDS
   try {
     let arrayOfcommands = [];
@@ -26,11 +25,14 @@ module.exports = async (client) => {
       }
     });
     client.on("ready", async () => {
-      // // for global slash commands
-      // await client.application.commands.set(arrayOfcommands);
-      // for guild commands
-      if (guildID) {
-        client.guilds.cache.get(guildID).commands.set(arrayOfcommands);
+      //  slash commands
+      if (slash.global) {
+        await client.application.commands.set(arrayOfcommands);
+      } else {
+        // for guild commands
+        if (guildID) {
+          client.guilds.cache.get(guildID)?.commands.set(arrayOfcommands);
+        }
       }
     });
     console.log(`${client.commands.size} Slash Commands Loaded`);
@@ -60,6 +62,7 @@ module.exports = async (client) => {
   } catch (e) {
     console.log(e);
   }
+
   // Loading Event Files
   try {
     fs.readdirSync("./events/").forEach((file) => {

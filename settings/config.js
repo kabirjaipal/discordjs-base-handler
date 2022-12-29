@@ -4,8 +4,6 @@ module.exports = {
   embed: {
     color: "#2f3136",
     wrongcolor: "#2f3136",
-    footertext: "Coded By Kabir Singh | Tech Boy Development",
-    footericon: "",
   },
   emoji: {
     ERROR: "❌",
@@ -19,5 +17,8 @@ module.exports = {
     bot: "🤖",
   },
   // others
-  guildID: "", // for slash command
+  slash: {
+    global: true,
+    guildID: "GuildId", // for slash command
+  },
 };
