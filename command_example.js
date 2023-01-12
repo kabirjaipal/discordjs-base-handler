@@ -3,8 +3,8 @@ const {
   CommandInteraction,
   ApplicationCommandType,
   PermissionFlagsBits,
+  Client,
 } = require("discord.js");
-const BOT = require("../../../handlers/Client");
 
 module.exports = {
   name: "",
@@ -12,15 +12,13 @@ module.exports = {
   userPermissions: PermissionFlagsBits.SendMessages,
   botPermissions: PermissionFlagsBits.SendMessages,
   category: "",
-  cooldown: 10,
   type: ApplicationCommandType.ChatInput,
   /**
    *
-   * @param {BOT} client
+   * @param {Client} client
    * @param {CommandInteraction} interaction
-   * @param {String[]} args
    */
-  run: async (client, interaction, args) => {
+  run: async (client, interaction) => {
     // Code
   },
 };
@@ -29,8 +27,8 @@ module.exports = {
 const {
   ContextMenuCommandInteraction,
   ApplicationCommandType,
+  Client,
 } = require("discord.js");
-const BOT = require("../../../handlers/Client");
 
 module.exports = {
   name: "",
@@ -38,7 +36,7 @@ module.exports = {
   type: ApplicationCommandType.Message,
   /**
    *
-   * @param {BOT} client
+   * @param {Client} client
    * @param {ContextMenuCommandInteraction} interaction
    */
   run: async (client, interaction) => {
@@ -51,8 +49,8 @@ module.exports = {
 const {
   ContextMenuCommandInteraction,
   ApplicationCommandType,
+  Client,
 } = require("discord.js");
-const BOT = require("../../../handlers/Client");
 
 module.exports = {
   name: "",
@@ -60,7 +58,7 @@ module.exports = {
   type: ApplicationCommandType.User,
   /**
    *
-   * @param {BOT} client
+   * @param {Client} client
    * @param {ContextMenuCommandInteraction} interaction
    */
   run: async (client, interaction) => {
@@ -69,8 +67,7 @@ module.exports = {
 };
 
 // message commands
-const { Message, PermissionFlagsBits } = require("discord.js");
-const BOT = require("../../../handlers/Client");
+const { Message, PermissionFlagsBits, Client } = require("discord.js");
 
 module.exports = {
   name: "",
@@ -81,7 +78,7 @@ module.exports = {
   cooldown: 10,
   /**
    *
-   * @param {BOT} client
+   * @param {Client} client
    * @param {Message} message
    * @param {String[]} args
    * @param {String} prefix
