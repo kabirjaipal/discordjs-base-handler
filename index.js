@@ -8,13 +8,14 @@ const {
 const { TOKEN } = require("./settings/config");
 
 const client = new Client({
-  intents: 3276799,
-  // intents: [
-  //   GatewayIntentBits.Guilds,
-  //   GatewayIntentBits.GuildMembers,
-  //   GatewayIntentBits.MessageContent,
-  //   GatewayIntentBits.GuildMessages,
-  // ],
+  // intents: 3276799,
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildVoiceStates,
+  ],
   partials: [
     Partials.Channel,
     Partials.Message,
