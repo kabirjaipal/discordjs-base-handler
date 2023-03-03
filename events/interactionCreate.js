@@ -1,8 +1,9 @@
-const { InteractionType } = require("discord.js");
+const { InteractionType, PermissionsBitField } = require("discord.js");
 const client = require("../index");
 
 client.on("interactionCreate", async (interaction) => {
   // code
+  if (interaction.user.bot || !interaction.guild) return;
   if (interaction.type == InteractionType.ApplicationCommand) {
     const command = client.scommands.get(interaction.commandName);
     if (!command) {
@@ -13,20 +14,24 @@ client.on("interactionCreate", async (interaction) => {
     } else {
       if (
         command.userPermissions &&
-        !interaction.member.permissions.has(command.userPermissions)
+        !interaction.member.permissions.has(
+          PermissionsBitField.resolve(command.userPermissions)
+        )
       ) {
-        return interaction.reply({
-          content: `you don't have enough permissions !!`,
-          ephemeral: true,
-        });
+        return client.sendEmbed(
+          interaction,
+          `You don't have enough Permissions !!`
+        );
       } else if (
         command.botPermissions &&
-        !interaction.guild.members.me.permissions.has(command.botPermissions)
+        !interaction.guild.members.me.permissions.has(
+          PermissionsBitField.resolve(command.botPermissions)
+        )
       ) {
-        return interaction.reply({
-          content: `i don't have enough permissions !!`,
-          ephemeral: true,
-        });
+        return client.sendEmbed(
+          interaction,
+          `I don't have enough Permissions !!`
+        );
       } else {
         command.run(client, interaction);
       }

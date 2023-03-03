@@ -3,8 +3,8 @@ const {
   CommandInteraction,
   ApplicationCommandType,
   PermissionFlagsBits,
-  Client,
 } = require("discord.js");
+const { Bot } = require("../../../handlers/Client");
 
 module.exports = {
   name: "",
@@ -15,7 +15,7 @@ module.exports = {
   type: ApplicationCommandType.ChatInput,
   /**
    *
-   * @param {Client} client
+   * @param {Bot} client
    * @param {CommandInteraction} interaction
    */
   run: async (client, interaction) => {
@@ -67,10 +67,12 @@ module.exports = {
 };
 
 // message commands
-const { Message, PermissionFlagsBits, Client } = require("discord.js");
+const { Message, PermissionFlagsBits } = require("discord.js");
+const { Bot } = require("../../../handlers/Client");
 
 module.exports = {
   name: "",
+  aliases: [],
   description: ``,
   userPermissions: PermissionFlagsBits.SendMessages,
   botPermissions: PermissionFlagsBits.SendMessages,
@@ -78,7 +80,7 @@ module.exports = {
   cooldown: 10,
   /**
    *
-   * @param {Client} client
+   * @param {Bot} client
    * @param {Message} message
    * @param {String[]} args
    * @param {String} prefix

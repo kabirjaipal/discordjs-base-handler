@@ -1,65 +1,65 @@
-const { Collection } = require("discord.js");
+const { EmbedBuilder, PermissionsBitField } = require("discord.js");
+const { cooldown } = require("../handlers/functions");
 const client = require("../index");
 const { PREFIX } = require("../settings/config");
 
 client.on("messageCreate", async (message) => {
-  if (message.author.bot || !message.guild) return;
+  if (message.author.bot || !message.guild || !message.id) return;
+
   let prefix = PREFIX;
-  let args = message.content.slice(PREFIX.length).trim().split(/ +/);
-  let cmd = args.shift()?.toLowerCase();
-  const command = client.mcommands.get(cmd);
+  let mentionprefix = new RegExp(
+    `^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`
+  );
+  if (!mentionprefix.test(message.content)) return;
+  const [, nprefix] = message.content.match(mentionprefix);
+  const args = message.content.slice(nprefix.length).trim().split(/ +/);
+  const cmd = args.shift().toLowerCase();
+  if (cmd.length === 0) {
+    if (nprefix.includes(client.user.id)) {
+      return message.reply({
+        embeds: [
+          new EmbedBuilder()
+            .setColor(client.config.embed.color)
+            .setDescription(
+              ` ${client.config.emoji.success} To See My All Commands Type  \`/help\` or \`${prefix}help\``
+            ),
+        ],
+      });
+    }
+  }
+  const command =
+    client.mcommands.get(cmd) ||
+    client.mcommands.find((cmds) => cmds.aliases && cmds.aliases.includes(cmd));
   if (!command) return;
   if (command) {
     if (
       command.userPermissions &&
-      !message.member.permissions.has(command.userPermissions)
+      !message.member.permissions.has(
+        PermissionsBitField.resolve(command.userPermissions)
+      )
     ) {
-      return message.reply({
-        content: `you don't have enough permissions !!`,
-      });
+      return client.sendEmbed(message, `You don't have enough Permissions !!`);
     } else if (
       command.botPermissions &&
-      !message.guild.members.me.permissions.has(command.botPermissions)
+      !message.guild.members.me.permissions.has(
+        PermissionsBitField.resolve(command.botPermissions)
+      )
     ) {
-      return message.reply({
-        content: `i don't have enough permissions !!`,
-      });
+      return client.sendEmbed(message, `I don't have enough Permissions !!`);
     } else if (cooldown(message, command)) {
-      return message.reply({
-        content: ` You are On Cooldown , wait \`${cooldown(
+      return client.sendEmbed(
+        message,
+        ` You are On Cooldown , wait \`${cooldown(
           message,
           command
-        ).toFixed()}\` Seconds`,
-      });
+        ).toFixed()}\` Seconds`
+      );
     } else {
       command.run(client, message, args, prefix);
     }
   }
 });
 
-function cooldown(message, cmd) {
-  if (!message || !cmd) return;
-  let { client, member } = message;
-  if (!client.cooldowns.has(cmd.name)) {
-    client.cooldowns.set(cmd.name, new Collection());
-  }
-  const now = Date.now();
-  const timestamps = client.cooldowns.get(cmd.name);
-  const cooldownAmount = cmd.cooldown * 1000;
-  if (timestamps.has(member.id)) {
-    const expirationTime = timestamps.get(member.id) + cooldownAmount;
-    if (now < expirationTime) {
-      const timeLeft = (expirationTime - now) / 1000; //get the lefttime
-      //return true
-      return timeLeft;
-    } else {
-      timestamps.set(member.id, now);
-      setTimeout(() => timestamps.delete(member.id), cooldownAmount);
-      return false;
-    }
-  } else {
-    timestamps.set(member.id, now);
-    setTimeout(() => timestamps.delete(member.id), cooldownAmount);
-    return false;
-  }
+function escapeRegex(newprefix) {
+  return newprefix.replace(/[.*+?^${}()|[\]\\]/g, `\\$&`);
 }
