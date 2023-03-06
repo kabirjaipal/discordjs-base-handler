@@ -19,6 +19,7 @@ a discord.js handler which support slash commands , message commands , events
 module.exports = {
   TOKEN: process.env.TOKEN || "BOT_TOKEN",
   PREFIX: process.env.PREFIX || "BOT_PREFIX",
+  Owners: ["OwnersId", "OwnersId"],
   Slash: {
     Global: false,
     GuildID: process.env.GuildID || "GUILD_ID",
@@ -45,8 +46,9 @@ If you have any feedback, please reach out to us at [Discord Server](https://dis
 
 - Commands Example
 
-```javascript
-// chat input slash commands
+# Slash Chat Input Command
+
+```js
 import { ApplicationCommandType, PermissionFlagsBits } from "discord.js";
 
 /**
@@ -64,8 +66,11 @@ export default {
     // Code
   },
 };
+```
 
-// message input slash commands
+# Slash Message Input Command
+
+```js
 import { ApplicationCommandType } from "discord.js";
 
 /**
@@ -80,9 +85,11 @@ export default {
     // Code
   },
 };
+```
 
+# Slash User Input Command
 
-// user slash commands
+```js
 const { ApplicationCommandType } = require("discord.js");
 
 /**
@@ -97,9 +104,11 @@ export default {
     // Code
   },
 };
+```
 
+# Message/Prefix Command
 
-// message commands
+```js
 import { PermissionFlagsBits } from "discord.js";
 
 /**
@@ -117,7 +126,6 @@ export default {
     // Code
   },
 };
-
 ```
 
 ## License
