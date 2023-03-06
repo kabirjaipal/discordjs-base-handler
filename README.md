@@ -16,7 +16,9 @@ a discord.js handler which support slash commands , message commands , events
 ### _Modify - config.js_
 
 ```js
-module.exports = {
+import { Colors } from "discord.js";
+
+const settings = {
   TOKEN: process.env.TOKEN || "BOT_TOKEN",
   PREFIX: process.env.PREFIX || "BOT_PREFIX",
   Owners: ["OwnersId", "OwnersId"],
@@ -25,6 +27,8 @@ module.exports = {
     GuildID: process.env.GuildID || "GUILD_ID",
   },
 };
+
+export default settings;
 ```
 
 ## Handler Features
