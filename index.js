@@ -1,10 +1,8 @@
-require("dotenv").config();
-const { Bot } = require("./handlers/Client");
-const { TOKEN } = require("./settings/config");
+import { config } from "dotenv";
+config();
+import { Bot } from "./handlers/Client.js";
 
-const client = new Bot();
-
-module.exports = client;
+export const client = new Bot();
 
 // login bot
-client.build(TOKEN);
+client.build(client.config.TOKEN);

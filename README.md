@@ -47,94 +47,77 @@ If you have any feedback, please reach out to us at [Discord Server](https://dis
 
 ```javascript
 // chat input slash commands
-const {
-  CommandInteraction,
-  ApplicationCommandType,
-  PermissionFlagsBits,
-  Client,
-} = require("discord.js");
+import { ApplicationCommandType, PermissionFlagsBits } from "discord.js";
 
-module.exports = {
+/**
+ * @type {import("../../../index.js").Scommand}
+ */
+export default {
   name: "",
-  description: ``,
+  description: "",
   userPermissions: PermissionFlagsBits.SendMessages,
   botPermissions: PermissionFlagsBits.SendMessages,
   category: "",
   type: ApplicationCommandType.ChatInput,
-  /**
-   *
-   * @param {Client} client
-   * @param {CommandInteraction} interaction
-   */
+
   run: async (client, interaction) => {
     // Code
   },
 };
 
 // message input slash commands
-const {
-  ContextMenuCommandInteraction,
-  ApplicationCommandType,
-  Client,
-} = require("discord.js");
+import { ApplicationCommandType } from "discord.js";
 
-module.exports = {
+/**
+ * @type {import("../../..").CMcommand}
+ */
+export default {
   name: "",
   category: "",
   type: ApplicationCommandType.Message,
-  /**
-   *
-   * @param {Client} client
-   * @param {ContextMenuCommandInteraction} interaction
-   */
+
   run: async (client, interaction) => {
     // Code
   },
 };
 
+
 // user slash commands
+const { ApplicationCommandType } = require("discord.js");
 
-const {
-  ContextMenuCommandInteraction,
-  ApplicationCommandType,
-  Client,
-} = require("discord.js");
-
-module.exports = {
+/**
+ * @type {import("../../..").CUcommand}
+ */
+export default {
   name: "",
   category: "",
   type: ApplicationCommandType.User,
-  /**
-   *
-   * @param {Client} client
-   * @param {ContextMenuCommandInteraction} interaction
-   */
+
   run: async (client, interaction) => {
     // Code
   },
 };
 
-// message commands
-const { Message, PermissionFlagsBits, Client } = require("discord.js");
 
-module.exports = {
+// message commands
+import { PermissionFlagsBits } from "discord.js";
+
+/**
+ * @type {import("../../../index.js").Mcommand}
+ */
+export default {
   name: "",
-  description: ``,
+  description: "",
   userPermissions: PermissionFlagsBits.SendMessages,
   botPermissions: PermissionFlagsBits.SendMessages,
   category: "",
-  cooldown: 10,
-  /**
-   *
-   * @param {Client} client
-   * @param {Message} message
-   * @param {String[]} args
-   * @param {String} prefix
-   */
+  cooldown: 5,
+
   run: async (client, message, args, prefix) => {
     // Code
   },
 };
+
 ```
 
 ## License

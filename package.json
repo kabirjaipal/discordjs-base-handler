@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "a best handler for discord bot",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js"
   },
