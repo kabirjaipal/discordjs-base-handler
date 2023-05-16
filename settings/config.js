@@ -1,5 +1,3 @@
-import { Colors } from "discord.js";
-
 const settings = {
   TOKEN: process.env.TOKEN || "Bot_Token",
   PREFIX: "BotPrefix",
@@ -9,8 +7,8 @@ const settings = {
     GuildID: process.env.GuildID || "Guild_Id",
   },
   embed: {
-    color: Colors.Blurple,
-    wrongColor: Colors.Red,
+    color: "Blurple",
+    wrongColor: "Red",
   },
   emoji: {
     success: "✅",
