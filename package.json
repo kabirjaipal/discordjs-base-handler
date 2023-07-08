@@ -10,7 +10,7 @@
   "author": "KABIRSINGH2004",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^14.7.1",
-    "dotenv": "^16.0.3"
+    "discord.js": "^14.11.0",
+    "dotenv": "^16.3.1"
   }
 }
