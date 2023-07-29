@@ -39,11 +39,12 @@ export default async (client) => {
 
     await Promise.all(items);
 
-    client.on("ready", async () => {
+   client.on("ready", async () => {
       if (Global) {
         client.application.commands.set(allCommands);
       } else {
-        client.guilds.cache.get(GuildID)?.commands.set(allCommands);
+        const Guild = client.guilds.cache.get(GuildID);
+        if (Guild) Guild.commands.set(allCommands);
       }
     });
   } catch (error) {
