@@ -31,15 +31,3 @@ export function cooldown(interaction, cmd) {
     return false;
   }
 }
-
-export function logStatus(name, isLoaded, type) {
-  const now = new Date();
-  const date = now.toLocaleDateString();
-  const time = now.toLocaleTimeString();
-
-  const statusIcon = isLoaded ? "\x1b[32m✅\x1b[0m" : "\x1b[31m❌\x1b[0m";
-  const statusText = isLoaded ? "Loaded" : "Not Loaded";
-  console.log(
-    `[${date} ${time}] ${type} : ${name} | Status: ${statusIcon} ${statusText}`
-  );
-}

@@ -1,13 +1,5 @@
-/**
- * @type {import("..").EventHandler}
- */
-export default {
-  name: "",
+import { client } from "../bot.js";
 
-  run: async (client) => {
-    // code
-  },
-};
-
-// get other params after (client ) depend on event like if messageCreate event then
-//  take params like (client,message) for interaction like (client,interaction)
+client.on("EVENT_NAME", async (/* Events Args like client,message*/) => {
+  // code
+});

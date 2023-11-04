@@ -1,14 +1,14 @@
+import { Bot } from "./handlers/Client.js";
 import {
+  ApplicationCommandNonOptions,
   ApplicationCommandType,
-  ClientEvents,
   CommandInteraction,
   ContextMenuCommandInteraction,
-  Interaction,
   InteractionReplyOptions,
   Message,
-} from "discord.js";
-import { Bot } from "./handlers/Client.js";
-import { ApplicationCommandNonOptions, Events } from "discord.js/typings";
+  UserContextMenuCommandInteraction,
+  InteractionResponse,
+} from "discord.js/typings";
 
 export interface Mcommand {
   name: string;
@@ -43,15 +43,16 @@ export interface CUcommand {
   name: string;
   category: string;
   type: ApplicationCommandType.User;
-  run: (client: Bot, interaction: ContextMenuCommandInteraction) => {};
+  run: (client: Bot, interaction: UserContextMenuCommandInteraction) => {};
 }
 
-export type EventHandler = {
-  name: keyof ClientEvents;
-  run: (client: Bot, ...args: ClientEvents[keyof ClientEvents]) => void;
-};
-
 export type send = (
-  interaction: Interaction,
-  data: InteractionReplyOptions
-) => void;
+  interactionOrMessage: CommandInteraction | Message,
+  options: InteractionReplyOptions
+) => Promise<Message | InteractionResponse>;
+
+export type SendEmbedFunction = (
+  interaction: CommandInteraction,
+  data: string,
+  ephemeral?: boolean
+) => Promise<Message | InteractionResponse>;

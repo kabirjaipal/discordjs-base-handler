@@ -46,8 +46,11 @@ export class Bot extends Client {
     this.login(token);
   }
 
+  /**
+   * @type {import("../index.js").SendEmbedFunction}
+   */
   async sendEmbed(interaction, data, ephemeral = false) {
-    return await this.send(interaction, {
+    return this.send(interaction, {
       embeds: [
         new EmbedBuilder()
           .setColor(this.config.embed.color)
@@ -67,17 +70,16 @@ export class Bot extends Client {
   /**
    * @type {import("../index.js").send}
    */
-  async send(interaction, data) {
+  async send(interactionOrMessage, options) {
     try {
-      if (interaction.deferred || interaction.replied) {
-        return await interaction.editReply(data);
+      if (interactionOrMessage.deferred || interactionOrMessage.replied) {
+        await interactionOrMessage.deferReply().catch((e) => {});
+        return interactionOrMessage.followUp(options);
       } else {
-        return await interaction.reply(data);
+        return interactionOrMessage.reply(options);
       }
     } catch (error) {
-      // console.error(error);
-      await interaction.deferReply().catch((e) => {});
-      return await interaction.editReply(data);
+      return interactionOrMessage.channel.send(options);
     }
   }
 }

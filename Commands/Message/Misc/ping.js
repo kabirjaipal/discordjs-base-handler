@@ -13,6 +13,6 @@ export default {
 
   run: async (client, message, args, prefix) => {
     // Code
-    return client.sendEmbed(message, `🏓 Pong \`${client.ws.ping}\``);
+    await client.sendEmbed(message, `🏓 Pong \`${client.ws.ping}\``);
   },
 };

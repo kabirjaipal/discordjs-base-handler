@@ -1,34 +1,31 @@
-import { Bot } from "./Client.js";
 import { readdir } from "node:fs/promises";
-import { logStatus } from "./functions.js";
 
 /**
- *
  * @param {Bot} client
  */
 export default async (client) => {
-  // code
-
   try {
-    const eventfiles = await readdir("./events");
-    const eventfilesFiltered = eventfiles.filter((f) => f.endsWith(".js"));
-    const items = await Promise.all(
-      eventfilesFiltered.map(async (file) => {
-        /**
-         * @type {import("../index.js").EventHandler}
-         */
-        let event = await import(`../events/${file}`).then((r) => r.default);
-        if (event?.name) {
-          client.events.set(event.name, event);
-          logStatus(event.name, true, "Event");
-          client.on(event.name, (...args) => event.run(client, ...args));
-        } else {
-          logStatus(event.name, false, "Event");
+    const eventFiles = await readdir("./events");
+    const eventFilesFiltered = eventFiles.filter((file) =>
+      file.endsWith(".js")
+    );
+
+    let count = 0;
+
+    await Promise.all(
+      eventFilesFiltered.map(async (file) => {
+        try {
+          await import(`../events/${file}`).then((r) => r.default);
+          count++;
+        } catch (error) {
+          console.error(`Error loading event from file ${file}:`, error);
+          return 0;
         }
       })
     );
-    await Promise.all(items);
+
+    console.log(`> ✅ Loaded ${count} Events !!`);
   } catch (error) {
-    console.log(error);
+    console.error("Error reading the events folder:", error);
   }
 };

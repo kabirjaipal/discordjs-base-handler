@@ -1,16 +1,61 @@
 {
-  "name": "discord-handler",
-  "version": "1.0.0",
-  "description": "a best handler for discord bot",
-  "main": "index.js",
+  "name": "discordjs-base-handler",
+  "version": "2.1.0",
+  "description": "A Discord bot handler for managing events and commands.",
+  "main": "bot.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "node bot.js"
   },
   "author": "KABIRSINGH2004",
-  "license": "ISC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kabirsingh2004/discordjs-base-handler"
+  },
+  "bugs": {
+    "url": "https://github.com/kabirsingh2004/discordjs-base-handler/issues"
+  },
+  "homepage": "https://github.com/kabirsingh2004/discordjs-base-handler",
+  "keywords": [
+    "discord",
+    "bot",
+    "handler",
+    "javascript",
+    "discordjs",
+    "v14",
+    "slashcommands",
+    "advanced",
+    "comprehensive",
+    "flexible",
+    "easy-to-use",
+    "well-documented",
+    "maintained",
+    "command handler",
+    "event handler",
+    "slash command handler",
+    "modal handler",
+    "button handler",
+    "interaction handler",
+    "permission handling",
+    "rate limiting",
+    "cooldown handling",
+    "localization",
+    "internationalization",
+    "scalability",
+    "performance",
+    "discord bot development",
+    "discord bot making",
+    "discord bot programming",
+    "discord bot tutorial",
+    "discord bot guide",
+    "discord bot example"
+  ],
   "dependencies": {
-    "discord.js": "^14.11.0",
+    "discord.js": "^14.13.0",
     "dotenv": "^16.3.1"
+  },
+  "engines": {
+    "node": ">=16"
   }
 }
