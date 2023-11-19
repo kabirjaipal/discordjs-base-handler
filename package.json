@@ -52,7 +52,7 @@
     "discord bot example"
   ],
   "dependencies": {
-    "discord.js": "^14.13.0",
+    "discord.js": "^14.14.1",
     "dotenv": "^16.3.1"
   },
   "engines": {
