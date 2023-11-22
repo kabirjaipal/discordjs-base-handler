@@ -29,18 +29,18 @@ export default settings;
 
 ## Handler Features
 
-- easy to use Handler
-- support event Handler
-- slash commands support
-- message commands support
-- based on [discord.js](https://discord.js.org/#/)
-- provied code snipet for commands
-- support sub directory in commands folder
-- support code suggestions in Handler
+- Easy-to-use Handler
+- Event handling support
+- Slash commands
+- Message commands
+- Built on [discord.js](https://discord.js.org/#/)
+- Code snippets for commands
+- Subdirectory support in the commands folder
+- Code suggestions in Handler
 
 ## Feedback
 
-If you have any feedback, please reach out to us at [Discord Server](https://discord.gg/PcUVWApWN3)
+If you have any feedback or need assistance, please join out [Discord Server](https://discord.gg/PcUVWApWN3)
 
 ## Usage/Examples
 
