@@ -9,8 +9,6 @@ I'm a Discord Bot Developer and here is mine bot handler
 3. Run `npm install` to install dependencies.
 4. Start the bot with `node index.js`.
 
-<br/>
-
 ### _Modify - config.js_
 
 ```js
