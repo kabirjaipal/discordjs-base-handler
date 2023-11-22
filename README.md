@@ -2,15 +2,13 @@
 
 I'm a Discord Bot Developer and here is mine bot handler
 
-## **Installation | How to use the Handler**
+## Installation | How to use the Handler
 
-a discord.js handler which support slash commands , message commands , events
+1. Clone this repository.
+2. Fill in the required details in **`settings/config.js`**.
+3. Run `npm install` to install dependencies.
+4. Start the bot with `node index.js`.
 
-**3.** Fill in everything in **`settings/config.js`**
-
-**4.** after Fill everything in config Type in shall **`npm install`**
-
-**5.** start the bot with **`node index.js`**
 <br/>
 
 ### _Modify - config.js_
