@@ -130,9 +130,18 @@ export default {
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
-<br/>
+This project is licensed under the [MIT License](https://choosealicense.com/licenses/mit/). See the [LICENSE](LICENSE) file for details.
 
-# Thanks For Using Mine Handler Please Give a Star
+# Acknowledgements
 
-If Any Bug Open Pull Request
+Thank you for considering the use of Kabir's Discord Bot Handler! If you find it helpful, we encourage you to give it a ⭐️.
+
+## Contributing
+
+If you encounter any bugs or have suggestions for improvement, please open a pull request. Your contributions are highly appreciated!
+
+## Support
+
+For any inquiries or assistance, feel free to reach out to us on our [Discord Server](https://discord.gg/PcUVWApWN3).
+
+Happy coding! 🚀
