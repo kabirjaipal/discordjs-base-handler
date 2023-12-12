@@ -8,6 +8,7 @@ import {
   Message,
   UserContextMenuCommandInteraction,
   InteractionResponse,
+  ApplicationCommandDataResolvable,
 } from "discord.js/typings";
 
 export interface Mcommand {
@@ -21,7 +22,7 @@ export interface Mcommand {
   run: (client: Bot, message: Message, args: string[], prefix: string) => {};
 }
 
-export interface Scommand {
+export interface CustomSCommand {
   name: string;
   description: string;
   userPermissions: bigint;
@@ -31,6 +32,8 @@ export interface Scommand {
   options?: ApplicationCommandNonOptions[];
   run: (client: Bot, interaction: CommandInteraction) => {};
 }
+
+type Scommand = ApplicationCommandDataResolvable & CustomSCommand;
 
 export interface CMcommand {
   name: string;
