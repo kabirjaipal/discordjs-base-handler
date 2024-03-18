@@ -57,12 +57,15 @@ import { ApplicationCommandType, PermissionFlagsBits } from "discord.js";
 export default {
   name: "",
   description: "",
-  userPermissions: PermissionFlagsBits.SendMessages,
-  botPermissions: PermissionFlagsBits.SendMessages,
+  userPermissions: [PermissionFlagsBits.SendMessages],
+  botPermissions: [
+    PermissionFlagsBits.SendMessages,
+    PermissionFlagsBits.EmbedLinks,
+  ],
   category: "",
   type: ApplicationCommandType.ChatInput,
 
-  run: async (client, interaction) => {
+  run: async ({ client, interaction }) => {
     // Code
   },
 };
@@ -81,7 +84,7 @@ export default {
   category: "",
   type: ApplicationCommandType.Message,
 
-  run: async (client, interaction) => {
+  run: async ({ client, interaction }) => {
     // Code
   },
 };
@@ -100,7 +103,7 @@ export default {
   category: "",
   type: ApplicationCommandType.User,
 
-  run: async (client, interaction) => {
+  run: async ({ client, interaction }) => {
     // Code
   },
 };
@@ -117,12 +120,15 @@ import { PermissionFlagsBits } from "discord.js";
 export default {
   name: "",
   description: "",
-  userPermissions: PermissionFlagsBits.SendMessages,
-  botPermissions: PermissionFlagsBits.SendMessages,
+  userPermissions: [PermissionFlagsBits.SendMessages],
+  botPermissions: [
+    PermissionFlagsBits.SendMessages,
+    PermissionFlagsBits.EmbedLinks,
+  ],
   category: "",
   cooldown: 5,
 
-  run: async (client, message, args, prefix) => {
+  run: async ({ client, message, args, prefix }) => {
     // Code
   },
 };

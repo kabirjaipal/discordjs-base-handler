@@ -11,6 +11,13 @@ import {
   ApplicationCommandDataResolvable,
 } from "discord.js/typings";
 
+interface McommandOptions {
+  client ?: Bot;
+  message ?: Message;
+  args ?: string[];
+  prefix ?: string;
+}
+
 export interface Mcommand {
   name: string;
   description: string;
@@ -19,7 +26,12 @@ export interface Mcommand {
   category: string;
   type: number;
   owneronly: boolean;
-  run: (client: Bot, message: Message, args: string[], prefix: string) => {};
+  run: (options:McommandOptions) => {};
+}
+
+interface ScommandOptions {
+  client ?: Bot;
+  interaction ?: CommandInteraction;
 }
 
 export interface CustomSCommand {
@@ -30,7 +42,7 @@ export interface CustomSCommand {
   category: string;
   type: ApplicationCommandType.ChatInput;
   options?: ApplicationCommandNonOptions[];
-  run: (client: Bot, interaction: CommandInteraction) => {};
+  run: (options:ScommandOptions) => {};
 }
 
 type Scommand = ApplicationCommandDataResolvable & CustomSCommand;

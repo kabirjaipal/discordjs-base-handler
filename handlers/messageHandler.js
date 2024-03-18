@@ -2,7 +2,8 @@ import { Bot } from "./Client.js";
 import { readdir } from "node:fs/promises";
 
 /**
- * @param {Bot} client
+ * Loads message commands for the client.
+ * @param {Bot} client - The client instance.
  */
 export default async (client) => {
   try {
@@ -34,8 +35,13 @@ export default async (client) => {
       })
     );
 
-    console.log(`> ✅ Loaded ${client.mcommands.size} Message Commands !!`);
+    console.log(
+      `> ✅ Successfully loaded ${client.mcommands.size} message commands.`
+    );
   } catch (error) {
-    console.error("Error reading the commands directory:", error);
+    console.error(
+      "An error occurred while reading the commands directory:",
+      error
+    );
   }
 };

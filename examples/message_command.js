@@ -6,12 +6,15 @@ import { PermissionFlagsBits } from "discord.js";
 export default {
   name: "",
   description: "",
-  userPermissions: PermissionFlagsBits.SendMessages,
-  botPermissions: PermissionFlagsBits.SendMessages,
+  userPermissions: [PermissionFlagsBits.SendMessages],
+  botPermissions: [
+    PermissionFlagsBits.SendMessages,
+    PermissionFlagsBits.EmbedLinks,
+  ],
   category: "",
   cooldown: 5,
 
-  run: async (client, message, args, prefix) => {
+  run: async ({ client, message, args, prefix }) => {
     // Code
   },
 };

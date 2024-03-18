@@ -2,9 +2,10 @@ import { Bot } from "./Client.js";
 import { readdir } from "node:fs/promises";
 
 /**
- * @param {Bot} client
+ * Loads slash commands for the client and registers them globally or in a specific guild.
+ * @param {Bot} client - The client instance.
  */
-export default async (client) => {
+export default async function loadSlashCommands(client) {
   const {
     Slash: { Global, GuildID },
   } = client.config;
@@ -40,6 +41,7 @@ export default async (client) => {
       })
     );
 
+    // Register commands globally or in a specific guild
     await client.on("ready", async () => {
       if (Global) {
         client.application.commands.set(allCommands);
@@ -48,8 +50,14 @@ export default async (client) => {
         if (guild) await guild.commands.set(allCommands);
       }
     });
-    console.log(`> ✅ Loaded ${client.scommands.size} Slash Commands !!`);
+
+    console.log(
+      `> ✅ Successfully loaded ${client.scommands.size} slash commands.`
+    );
   } catch (error) {
-    console.error("Error reading the commands directory:", error);
+    console.error(
+      "An error occurred while reading the commands directory:",
+      error
+    );
   }
-};
+}

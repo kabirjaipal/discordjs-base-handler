@@ -1,16 +1,17 @@
 import { readdir } from "node:fs/promises";
 
 /**
- * @param {Bot} client
+ * Loads event handlers for the client.
+ * @param {Bot} client - The client instance.
  */
 export default async (client) => {
   try {
+    let count = 0;
+
     const eventFiles = await readdir("./events");
     const eventFilesFiltered = eventFiles.filter((file) =>
       file.endsWith(".js")
     );
-
-    let count = 0;
 
     await Promise.all(
       eventFilesFiltered.map(async (file) => {
@@ -24,8 +25,8 @@ export default async (client) => {
       })
     );
 
-    console.log(`> ✅ Loaded ${count} Events !!`);
+    console.log(`> ✅ Successfully loaded ${count} events.`);
   } catch (error) {
-    console.error("Error reading the events folder:", error);
+    console.error("An error occurred while reading the events folder:", error);
   }
 };

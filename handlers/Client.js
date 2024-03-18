@@ -7,7 +7,13 @@ import {
 } from "discord.js";
 import settings from "../settings/config.js";
 
+/**
+ * Custom client class extending Discord.js Client.
+ */
 export class Bot extends Client {
+  /**
+   * Creates an instance of Bot.
+   */
   constructor() {
     super({
       partials: [
@@ -33,7 +39,7 @@ export class Bot extends Client {
       },
     });
 
-    // global variables
+    // Set global variables
     this.config = settings;
     this.scommands = new Collection();
     this.mcommands = new Collection();
@@ -41,13 +47,21 @@ export class Bot extends Client {
     this.events = new Collection();
   }
 
+  /**
+   * Builds the client and logs in with the provided token.
+   * @param {string} token - The bot token.
+   */
   async build(token) {
     await loadHandlers(this);
     this.login(token);
   }
 
   /**
-   * @type {import("../index.js").SendEmbedFunction}
+   * Sends an embed message.
+   * @param {Interaction} interaction - The interaction where the message is sent.
+   * @param {string} data - The content of the message.
+   * @param {boolean} [ephemeral=false] - Whether the message should be ephemeral.
+   * @returns {Promise<Message | InteractionResponse>} The sent message or interaction response.
    */
   async sendEmbed(interaction, data, ephemeral = false) {
     return this.send(interaction, {
@@ -60,6 +74,11 @@ export class Bot extends Client {
     });
   }
 
+  /**
+   * Gets the footer for an embed message.
+   * @param {User} user - The user to display in the footer.
+   * @returns {Footer} The footer object.
+   */
   getFooter(user) {
     return {
       text: `Requested By ${user.username}`,
@@ -68,7 +87,10 @@ export class Bot extends Client {
   }
 
   /**
-   * @type {import("../index.js").send}
+   * Sends a message or interaction response.
+   * @param {CommandInteraction | Message} interactionOrMessage - The interaction or message.
+   * @param {InteractionReplyOptions} options - The options for the reply.
+   * @returns {Promise<Message | InteractionResponse>} The sent message or interaction response.
    */
   async send(interactionOrMessage, options) {
     try {
@@ -84,6 +106,10 @@ export class Bot extends Client {
   }
 }
 
+/**
+ * Loads message, slash, and event handlers for the client.
+ * @param {Bot} client - The client instance.
+ */
 async function loadHandlers(client) {
   ["messageHandler", "slashHandler", "eventHandler"].forEach(async (file) => {
     let handler = await import(`./${file}.js`).then((r) => r.default);

@@ -8,7 +8,7 @@ export default {
   category: "",
   type: ApplicationCommandType.Message,
 
-  run: async (client, interaction) => {
+  run: async ({ client, interaction }) => {
     // Code
   },
 };

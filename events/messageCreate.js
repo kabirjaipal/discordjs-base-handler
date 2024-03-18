@@ -1,69 +1,110 @@
-import { PermissionsBitField } from "discord.js";
 import { cooldown } from "../handlers/functions.js";
 import { client } from "../bot.js";
+import { PermissionsBitField } from "discord.js";
 
+/**
+ * Event listener for when a message is created.
+ * @param {Message} message - The message object received from Discord.
+ */
 client.on("messageCreate", async (message) => {
-  // code
-  if (message.author.bot || !message.guild || !message.id) return;
-  let prefix = client.config.PREFIX;
+  try {
+    // Check for necessary conditions
+    if (message.author.bot || !message.guild || !message.id) return;
 
-  let mentionprefix = new RegExp(
-    `^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`
-  );
-  if (!mentionprefix.test(message.content)) return;
-  const [, nprefix] = message.content.match(mentionprefix);
-  const args = message.content.slice(nprefix.length).trim().split(/ +/);
-  const cmd = args.shift().toLowerCase();
-  if (cmd.length === 0) {
-    if (nprefix.includes(client.user.id)) {
+    const prefix = client.config.PREFIX;
+
+    const mentionPrefix = new RegExp(
+      `^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`
+    );
+
+    if (!mentionPrefix.test(message.content)) return;
+    const [, nPrefix] = message.content.match(mentionPrefix);
+    const args = message.content.slice(nPrefix.length).trim().split(/ +/);
+    const cmd = args.shift().toLowerCase();
+
+    if (cmd.length === 0) {
+      if (nPrefix.includes(client.user.id)) {
+        return client.sendEmbed(
+          message,
+          ` ${client.config.emoji.success} To See My All Commands Type  \`/help\` or \`${prefix}help\``
+        );
+      }
+    }
+
+    // Find the command
+    /**
+     * @type {import("../index.js").Mcommand}
+     */
+    const command =
+      client.mcommands.get(cmd) ||
+      client.mcommands.find(
+        (cmds) => cmds.aliases && cmds.aliases.includes(cmd)
+      );
+
+    // Check if the command exists
+    if (!command) return;
+
+    const { owneronly, userPermissions, botPermissions } = command;
+    const { author, member, guild } = message;
+
+    const perms = new PermissionsBitField();
+
+    // Check ownership
+    if (owneronly && !client.config.Owners.includes(author.id)) {
       return client.sendEmbed(
         message,
-        ` ${client.config.emoji.success} To See My All Commands Type  \`/help\` or \`${prefix}help\``
+        `This command is restricted to authorized person only.`
       );
     }
-  }
-  /**
-   * @type {import("..").Mcommand}
-   */
-  const command =
-    client.mcommands.get(cmd) ||
-    client.mcommands.find((cmds) => cmds.aliases && cmds.aliases.includes(cmd));
-  let Owners = client.config.Owners;
-  if (!command) return;
-  if (command) {
-    if (command.owneronly && !Owners.includes(message.author.id)) {
-      return client.sendEmbed(
+
+    // Check user permissions
+    if (userPermissions && !member.permissions.has(userPermissions)) {
+      perms.add(userPermissions);
+      const missingPermName = perms.toArray().join(", ");
+      await client.sendEmbed(
         message,
-        `Only ${Owners.map((m) => `<@${m}>`)} Can Use This Command`
+        `You are missing the following permissions: \`${missingPermName}\``
       );
-    } else if (
-      command.userPermissions &&
-      !message.member.permissions.has(
-        PermissionsBitField.resolve(command.userPermissions)
-      )
-    ) {
-      return client.sendEmbed(message, `You don't have enough Permissions !!`);
-    } else if (
-      command.botPermissions &&
-      !message.guild.members.me.permissions.has(
-        PermissionsBitField.resolve(command.botPermissions)
-      )
-    ) {
-      return client.sendEmbed(message, `I don't have enough Permissions !!`);
-    } else if (cooldown(message, command)) {
+      return perms.remove(userPermissions);
+    }
+
+    // Check bot permissions
+    if (botPermissions && !guild.members.me.permissions.has(botPermissions)) {
+      perms.add(botPermissions);
+      const missingPermName = perms.toArray().join(", ");
+      await client.sendEmbed(
+        message,
+        `I am missing the following permissions: ${missingPermName}`
+      );
+      return perms.remove(botPermissions);
+    }
+
+    // Check cooldown
+    if (cooldown(message, command)) {
       return client.sendEmbed(
         message,
-        ` You are On Cooldown , wait \`${cooldown(
+        `You are currently on cooldown. Please wait for ${cooldown(
           message,
           command
-        ).toFixed()}\` Seconds`
+        ).toFixed()} seconds before trying again.`
       );
-    } else {
-      command.run(client, message, args, prefix);
     }
+
+    // Run the command
+    await command.run({ client, message, args, prefix });
+  } catch (error) {
+    console.error(
+      "An error occurred while processing messageCreate event:",
+      error
+    );
   }
 });
 
-function escapeRegex(newprefix) {
-  return newprefix?.replace(/[.*+?^${}()|[\]\\]/g, `\\$&`);
+/**
+ * Escapes special characters in a string to create a regex pattern.
+ * @param {string} newPrefix - The string to escape.
+ * @returns {string} The escaped string.
+ */
+function escapeRegex(newPrefix) {
+  return newPrefix?.replace(/[.*+?^${}()|[\]\\]/g, `\\$&`);
 }
