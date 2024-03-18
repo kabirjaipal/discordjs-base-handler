@@ -45,7 +45,7 @@ client.on("interactionCreate", async (interaction) => {
       );
 
       // Return early if user permissions are missing
-      return;
+      return missingPermissions.remove(userPermissions);
     }
 
     // Check bot permissions
@@ -65,7 +65,7 @@ client.on("interactionCreate", async (interaction) => {
       );
 
       // Return early if bot permissions are missing
-      return;
+      return missingPermissions.remove(botPermissions);
     }
 
     // Run the command
