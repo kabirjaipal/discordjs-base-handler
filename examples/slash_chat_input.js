@@ -1,4 +1,4 @@
-import { ApplicationCommandType, PermissionFlagsBits } from "discord.js";
+import { ApplicationCommandType } from "discord.js";
 
 /**
  * @type {import("../../../index.js").Scommand}
@@ -6,11 +6,8 @@ import { ApplicationCommandType, PermissionFlagsBits } from "discord.js";
 export default {
   name: "",
   description: "",
-  userPermissions: [PermissionFlagsBits.SendMessages],
-  botPermissions: [
-    PermissionFlagsBits.SendMessages,
-    PermissionFlagsBits.EmbedLinks,
-  ],
+  userPermissions: ["SendMessages"],
+  botPermissions: ["SendMessages", "EmbedLinks"],
   category: "",
   type: ApplicationCommandType.ChatInput,
 

@@ -1,7 +1,6 @@
 import { Bot } from "./handlers/Client.js";
 import {
   ApplicationCommandNonOptions,
-  ApplicationCommandType,
   CommandInteraction,
   ContextMenuCommandInteraction,
   InteractionReplyOptions,
@@ -9,6 +8,7 @@ import {
   UserContextMenuCommandInteraction,
   InteractionResponse,
   ApplicationCommandDataResolvable,
+  PermissionResolvable,
 } from "discord.js/typings";
 
 interface McommandOptions {
@@ -21,10 +21,9 @@ interface McommandOptions {
 export interface Mcommand {
   name: string;
   description: string;
-  userPermissions: bigint[];
-  botPermissions: bigint[];
+  userPermissions: PermissionResolvable[];
+  botPermissions: PermissionResolvable[];
   category: string;
-  type: number;
   owneronly: boolean;
   run: (options: McommandOptions) => {};
 }
@@ -37,10 +36,10 @@ interface ScommandOptions {
 export interface CustomSCommand {
   name: string;
   description: string;
-  userPermissions: bigint[];
-  botPermissions: bigint[];
+  userPermissions: PermissionResolvable[];
+  botPermissions: PermissionResolvable[];
   category: string;
-  type: ApplicationCommandType.ChatInput;
+  type: number;
   options?: ApplicationCommandNonOptions[];
   run: (options: ScommandOptions) => {};
 }
@@ -50,14 +49,14 @@ type Scommand = ApplicationCommandDataResolvable & CustomSCommand;
 export interface CMcommand {
   name: string;
   category: string;
-  type: ApplicationCommandType.Message;
+  type: number;
   run: (client: Bot, interaction: ContextMenuCommandInteraction) => {};
 }
 
 export interface CUcommand {
   name: string;
   category: string;
-  type: ApplicationCommandType.User;
+  type: number;
   run: (client: Bot, interaction: UserContextMenuCommandInteraction) => {};
 }
 

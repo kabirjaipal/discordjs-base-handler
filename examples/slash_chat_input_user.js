@@ -1,4 +1,4 @@
-const { ApplicationCommandType } = require("discord.js");
+import { ApplicationCommandType } from "discord.js";
 
 /**
  * @type {import("../../..").CUcommand}

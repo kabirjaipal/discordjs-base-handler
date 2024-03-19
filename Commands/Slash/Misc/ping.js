@@ -1,4 +1,4 @@
-import { ApplicationCommandType, PermissionFlagsBits } from "discord.js";
+import { ApplicationCommandType } from "discord.js";
 
 /**
  * @type {import("../../../index").Scommand}
@@ -6,11 +6,8 @@ import { ApplicationCommandType, PermissionFlagsBits } from "discord.js";
 export default {
   name: "ping",
   description: "Check the bot's latency.",
-  userPermissions: [PermissionFlagsBits.SendMessages],
-  botPermissions: [
-    PermissionFlagsBits.SendMessages,
-    PermissionFlagsBits.EmbedLinks,
-  ],
+  userPermissions: ["SendMessages"],
+  botPermissions: ["SendMessages", "EmbedLinks"],
   category: "Misc",
   type: ApplicationCommandType.ChatInput,
 

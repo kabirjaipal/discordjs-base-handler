@@ -1,16 +1,11 @@
-import { PermissionFlagsBits } from "discord.js";
-
 /**
  * @type {import("../../../index.js").Mcommand}
  */
 export default {
   name: "ping",
   description: "Check the bot's latency.",
-  userPermissions: [PermissionFlagsBits.SendMessages],
-  botPermissions: [
-    PermissionFlagsBits.SendMessages,
-    PermissionFlagsBits.EmbedLinks,
-  ],
+  userPermissions: ["SendMessages"],
+  botPermissions: ["SendMessages", "EmbedLinks"],
   category: "Misc",
   cooldown: 5,
 

@@ -1,6 +1,5 @@
 import { cooldown } from "../handlers/functions.js";
 import { client } from "../bot.js";
-import { PermissionsBitField } from "discord.js";
 
 /**
  * Event listener for when a message is created.
@@ -47,8 +46,6 @@ client.on("messageCreate", async (message) => {
     const { owneronly, userPermissions, botPermissions } = command;
     const { author, member, guild } = message;
 
-    const perms = new PermissionsBitField();
-
     // Check ownership
     if (owneronly && !client.config.Owners.includes(author.id)) {
       return client.sendEmbed(
@@ -56,27 +53,32 @@ client.on("messageCreate", async (message) => {
         `This command is restricted to authorized person only.`
       );
     }
-
     // Check user permissions
-    if (userPermissions && !member.permissions.has(userPermissions)) {
-      perms.add(userPermissions);
-      const missingPermName = perms.toArray().join(", ");
+    const missingUserPerms = userPermissions.filter(
+      (perm) => !member.permissions.has(perm)
+    );
+    if (missingUserPerms.length > 0) {
       await client.sendEmbed(
         message,
-        `You are missing the following permissions: \`${missingPermName}\``
+        `You are missing the following permissions: \`${missingUserPerms.join(
+          ", "
+        )}\``
       );
-      return perms.remove(userPermissions);
+      return;
     }
 
     // Check bot permissions
-    if (botPermissions && !guild.members.me.permissions.has(botPermissions)) {
-      perms.add(botPermissions);
-      const missingPermName = perms.toArray().join(", ");
+    const missingBotPerms = botPermissions.filter(
+      (perm) => !guild.members.me.permissions.has(perm)
+    );
+    if (missingBotPerms.length > 0) {
       await client.sendEmbed(
         message,
-        `I am missing the following permissions: ${missingPermName}`
+        `I am missing the following permissions: \`${missingBotPerms.join(
+          ", "
+        )}\``
       );
-      return perms.remove(botPermissions);
+      return;
     }
 
     // Check cooldown

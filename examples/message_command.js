@@ -1,16 +1,11 @@
-import { PermissionFlagsBits } from "discord.js";
-
 /**
  * @type {import("../../../index.js").Mcommand}
  */
 export default {
   name: "",
   description: "",
-  userPermissions: [PermissionFlagsBits.SendMessages],
-  botPermissions: [
-    PermissionFlagsBits.SendMessages,
-    PermissionFlagsBits.EmbedLinks,
-  ],
+  userPermissions: ["SendMessages"],
+  botPermissions: ["SendMessages", "EmbedLinks"],
   category: "",
   cooldown: 5,
 
