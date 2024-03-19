@@ -12,37 +12,37 @@ import {
 } from "discord.js/typings";
 
 interface McommandOptions {
-  client ?: Bot;
-  message ?: Message;
-  args ?: string[];
-  prefix ?: string;
+  client?: Bot;
+  message?: Message;
+  args?: string[];
+  prefix?: string;
 }
 
 export interface Mcommand {
   name: string;
   description: string;
-  userPermissions: bigint;
-  botPermissions: bigint;
+  userPermissions: bigint[];
+  botPermissions: bigint[];
   category: string;
   type: number;
   owneronly: boolean;
-  run: (options:McommandOptions) => {};
+  run: (options: McommandOptions) => {};
 }
 
 interface ScommandOptions {
-  client ?: Bot;
-  interaction ?: CommandInteraction;
+  client?: Bot;
+  interaction?: CommandInteraction;
 }
 
 export interface CustomSCommand {
   name: string;
   description: string;
-  userPermissions: bigint;
-  botPermissions: bigint;
+  userPermissions: bigint[];
+  botPermissions: bigint[];
   category: string;
   type: ApplicationCommandType.ChatInput;
   options?: ApplicationCommandNonOptions[];
-  run: (options:ScommandOptions) => {};
+  run: (options: ScommandOptions) => {};
 }
 
 type Scommand = ApplicationCommandDataResolvable & CustomSCommand;
